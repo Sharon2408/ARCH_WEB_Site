@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ec8917219d.js" crossorigin="anonymous"></script>
+    <script src="/Assets/js/bootstrap.bundle.min.js"></script>
+    <script src=""></script>
+    <link rel="stylesheet" href="/Assets/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+      #search{
+        border-radius: 20px;
+      }
+      .dropdown{
+        color: black;
+        font-weight: bolder;
+      }
+    </style>
+</head>
+<body>
+  <!-- NAV BAR -->
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <!-- LOGO -->
+            <img src="./images/Logo.png" alt="" width="150" height="40">
+          </a>
+          <!-- TOGGLE BUTTON -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- TOGGLE ICON -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- NAVBAR ITEMS -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <!-- DROP DOWN IN NAVBAR -->
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Catogories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          
+        </ul>
+        <a href="" class="ms-5 mt-2" target="_blank" rel="noopener noreferrer"><i class=" align-right fa-solid fa-heart fa-xl" ></i></a>
+        <a href="http://" class="ms-5 mt-2" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-cart-shopping fa-xl"></i></a>
+        <form class="d-flex" method="get" onsubmit="">
+            <input id="search" class="form-control ms-5 " type="search" placeholder="Search" aria-label="Search">
+            <button id="search" class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="btn btn-outline-dark ms-3" type="submit">LOGIN</button>
+           <a href="SignUp.html" class="btn btn-outline-dark ms-3"  target="_blank"> SIGNUP </a> 
+          </form>
+      </div>
+    </div>
+  </nav>
+</body>
+</html>
