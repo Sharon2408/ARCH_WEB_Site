@@ -14,6 +14,9 @@ if(!nameInput || !emailInput ||!passwordInput || !confirmpasswordInput){
       document.getElementById("confirmpasswordError").innerHTML =
       "Confirm Password cannot be empty";
 }
+else{
+  Signup();
+}
 }
 
 
@@ -72,4 +75,32 @@ function validate_confirmpassword(){
           document.getElementById('confirmpasswordError').innerHTML = "Passwords not matched";
       }
         else document.getElementById("confirmpasswordError").innerHTML = "";
+}
+
+function Signup(){
+  const user_name = document.getElementById('name').value;
+  const user_email = document.getElementById('email').value;
+  const user_password = document.getElementById('password').value;
+  const user_confirmpassword = document.getElementById('confirmpassword').value;
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "http://localhost:3000/Signup");
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(
+    JSON.stringify({
+      name: user_name,
+      email: user_email,
+      password: user_password,
+      confirm_password: user_confirmpassword,
+    })
+  );
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var alertHTML = "";
+      const objects = JSON.parse(this.responseText);
+      console.log(objects)
+      alertHTML += '<span class="alert alert-success" role="alert"> This is a success alert—check it out! </span>'
+      document.getElementById('alert').innerHTML = alertHTML;
+    }
+  };
 }

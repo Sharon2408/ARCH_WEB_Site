@@ -1,0 +1,39 @@
+{
+  "Signup": [
+    {
+      "id": 1,
+      "name": "Sharon",
+      "email": "sharonantony2408@gmail.com",
+      "password": "Basket9486!",
+      "confirm_password": "Basket9486!"
+    },
+    {
+      "name": "Sharon D",
+      "email": "sharonantony2408@gmail.com",
+      "password": "Basket9486!",
+      "confirm_password": "Basket9486!",
+      "id": 2
+    },
+    {
+      "name": "Arun",
+      "email": "aaronantony@gmail.com",
+      "password": ";;jhkjkk",
+      "confirm_password": "",
+      "id": 3
+    },
+    {
+      "name": "Sharon D",
+      "email": "sharonantony2408@gmail.com",
+      "password": "Sha12@",
+      "confirm_password": "Sha12@",
+      "id": 4
+    },
+    {
+      "name": "Sharon D",
+      "email": "sharonantony2408@gmail.com",
+      "password": "SHa123@",
+      "confirm_password": "SHa123@",
+      "id": 5
+    }
+  ]
+}

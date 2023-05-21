@@ -1,6 +1,10 @@
 .heart{
     color: inherit;
 }
+.heart:hover{
+  color:black;
+}
+
 #search{
     border-radius: 30px;
 }

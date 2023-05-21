@@ -17,6 +17,10 @@
     </style>
 </head>
 <body>
+  <!-- Alert -->
+  <div id="alert">
+
+  </div>
   <!-- NAV BAR -->
  <nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky">
     <div class="container-fluid">
@@ -66,22 +70,22 @@
       <div class="modal-body">
         <!-- NAME -->
         <label  class="form-label">Name</label>
-        <input type="text" onclick="validate_name()" class="form-control" id="name">
+        <input type="text" oninput="validate_name()" class="form-control" id="name">
         <small id="nameError" class="text-danger"></small>
         <!-- EMAIL ID -->
         <br>
         <label  class="form-label">Email</label>
-        <input type="text" onclick="validate_email()" class="form-control" id="email">
+        <input type="email" oninput="validate_email()" class="form-control" id="email">
         <small id="emailError" class="text-danger"></small>
         <!-- PASSWORD -->
         <br>
         <label  class="form-label">Password</label>
-        <input type="text" onclick="validate_password()" class="form-control" id="password">
+        <input type="password" oninput="validate_password()" class="form-control" id="password">
         <small id="passwordError" class="text-danger"></small>
         <!-- confirmpassword -->
         <br>
         <label  class="form-label">Confirm Password</label>
-        <input type="text" onclick="validate_confirmpassword()" class="form-control" id="confirmpassword">
+        <input type="password" oninput="validate_confirmpassword();"  class="form-control" id="confirmpassword">
         <small id="confirmpasswordError" class="text-danger"></small>
         <br>
         <p>Already have an Account? <a href=""id="login">LogIn</a> </p>
@@ -113,8 +117,8 @@
   </div>
   <br>
   <br>
-  <!-- TABS -->
-  <div class="container">
+  <!-- CARDS -->
+  <div class="container" id="cards">
     <div class="row">
       <div class="col-md-4">
         <div class="card mb-4 glowing-border">
@@ -122,8 +126,9 @@
           <div class="card-body">
             <h5 class="card-title">Architectural Masterpiece</h5>
             <p class="card-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum</p>
-            <a href="#" class="btn btn-primary glowing-button">Buy Now</a>
+              anim id est laborum </p>
+              <a href="#" class="btn btn-primary glowing-button">Buy Now</a>
+              <b><br>|₹3,00,000|</b>
           </div>
         </div>
       </div>
@@ -135,6 +140,7 @@
             <p class="card-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
               anim id est laborum</p>
             <a href="#" class="btn btn-primary glowing-button">Buy Now</a>
+            <b><br>|₹6,00,000|</b>
           </div>
         </div>
       </div>
@@ -146,13 +152,12 @@
             <p class="card-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
               anim id est laborum.</p>
             <a href="#" class="btn btn-primary glowing-button">Buy Now</a>
+            <b><br>|₹10,00,000|</b>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
+</div>
 </body>
 </html>
