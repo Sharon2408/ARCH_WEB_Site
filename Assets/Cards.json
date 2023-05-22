@@ -2,10 +2,35 @@
     "Cards": [
       {
         "id": 1,
-        "Owner_name": "Sharon",
-        "Phone_No": "9597303632",
-        "Location": "Coimbatore",
-        "Price":"10,00,000"
+        "Photo":"/Assets/images/house1.jpeg",
+        "Price":"10,00,000",
+        "Description":"3BHK House with a good interior all at your doorstep designs as you wish",
+        "Location": "Coimbatore"
+        
+      },
+      {
+        "id": 1,
+        "Photo":"/Assets/images/house1.jpeg",
+        "Price":"10,00,000",
+        "Description":"3BHK House with a good interior all at your doorstep designs as you wish",
+        "Location": "Coimbatore"
+        
+      },
+      {
+        "id": 1,
+        "Photo":"/Assets/images/house1.jpeg",
+        "Price":"10,00,000",
+        "Description":"3BHK House with a good interior all at your doorstep designs as you wish",
+        "Location": "Coimbatore"
+        
+      },
+      {
+        "id": 1,
+        "Photo":"/Assets/images/house1.jpeg",
+        "Price":"10,00,000",
+        "Description":"3BHK House with a good interior all at your doorstep designs as you wish",
+        "Location": "Coimbatore"
+        
       }
     ]
 }
