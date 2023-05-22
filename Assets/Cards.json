@@ -1,0 +1,11 @@
+{
+    "Cards": [
+      {
+        "id": 1,
+        "Owner_name": "Sharon",
+        "Phone_No": "9597303632",
+        "Location": "Coimbatore",
+        "Price":"10,00,000"
+      }
+    ]
+}
