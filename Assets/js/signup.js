@@ -1,34 +1,33 @@
 // Empty Fields
-function validate(){
+function validate() {
   const nameInput = document.getElementById("name").value;
   const emailInput = document.getElementById("email").value;
   const passwordInput = document.getElementById('password').value;
   const confirmpasswordInput = document.getElementById('confirmpassword').value;
-if(!nameInput || !emailInput ||!passwordInput || !confirmpasswordInput){
-  document.getElementById("nameError").innerHTML =
+  if (!nameInput || !emailInput || !passwordInput || !confirmpasswordInput) {
+    document.getElementById("nameError").innerHTML =
       "Name cannot be empty";
-      document.getElementById("emailError").innerHTML =
+    document.getElementById("emailError").innerHTML =
       "Email-ID cannot be empty";
-      document.getElementById("passwordError").innerHTML =
+    document.getElementById("passwordError").innerHTML =
       "Password cannot be empty";
-      document.getElementById("confirmpasswordError").innerHTML =
+    document.getElementById("confirmpasswordError").innerHTML =
       "Confirm Password cannot be empty";
+  }
+  else {
+    Signup();
+  }
 }
-else{
-  Signup();
-}
-}
-
 
 // Name Validation
 function validate_name() {
   const nameInput = document.getElementById("name").value;
   const nameregex = /^[a-zA-Z\- ]{3,50}$/;
- 
+
   if (!nameInput) {
     document.getElementById("nameError").innerHTML =
       "Name cannot be empty";
-  
+
   } else if (!nameregex.test(nameInput)) {
     document.getElementById("nameError").innerHTML =
       "Name Should be atleast 3 charachters long";
@@ -43,7 +42,7 @@ function validate_email() {
   if (!emailInput) {
     document.getElementById("emailError").innerHTML =
       "Email-ID cannot be empty";
-  } 
+  }
   else if (!emailregex.test(emailInput)) {
     document.getElementById("emailError").innerHTML =
       "Please enter a valid email-id";
@@ -51,33 +50,34 @@ function validate_email() {
   else document.getElementById("emailError").innerHTML = "";
 }
 // PasswordValidation
-function validate_password(){
+function validate_password() {
   const passwordInput = document.getElementById('password').value;
   const passwordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?])[A-Za-z\d!@#$%^&*()_\-+=<>?]{8,}$/;
   if (!passwordInput) {
     document.getElementById("passwordError").innerHTML =
       "Password cannot be empty";
   }
-      else if(!passwordregex.test(passwordInput)){
-          document.getElementById('passwordError').innerHTML = "Password must contain 1 uppercase 1 lowercase and special symbols";
-      }
-        else document.getElementById("passwordError").innerHTML = "";
+  else if (!passwordregex.test(passwordInput)) {
+    document.getElementById('passwordError').innerHTML = "Password must contain 1 uppercase 1 lowercase and special symbols";
+  }
+  else document.getElementById("passwordError").innerHTML = "";
 }
 // Confirm Password Validation
-function validate_confirmpassword(){
+function validate_confirmpassword() {
   const confirmpasswordInput = document.getElementById('confirmpassword').value;
   const passwordInput = document.getElementById('password').value;
-  if (!confirmpasswordInput ) {
+  if (!confirmpasswordInput) {
     document.getElementById("confirmpasswordError").innerHTML =
       "Confirm Password cannot be empty";
   }
-      else if(confirmpasswordInput !== passwordInput){
-          document.getElementById('confirmpasswordError').innerHTML = "Passwords not matched";
-      }
-        else document.getElementById("confirmpasswordError").innerHTML = "";
+  else if (confirmpasswordInput !== passwordInput) {
+    document.getElementById('confirmpasswordError').innerHTML = "Passwords not matched";
+  }
+  else document.getElementById("confirmpasswordError").innerHTML = "";
 }
 
-function Signup(){
+// SignUp informations json
+function Signup() {
   const user_name = document.getElementById('name').value;
   const user_email = document.getElementById('email').value;
   const user_password = document.getElementById('password').value;
@@ -105,30 +105,88 @@ function Signup(){
   };
 }
 
-function create_cards(){
+//LOGIN
+function validate_login(){
+  const emailInput_login = document.getElementById("email1").value;
+  const passwordInput_login = document.getElementById('password1').value;
+  if(!emailInput_login || !passwordInput_login){
+  document.getElementById("emailError1").innerHTML =
+  "Email cannot be empty";
+  document.getElementById("passwordError1").innerHTML =
+  "Password cannot be empty";
+  }
+  else{
+    login_form();
+  }
+}
+
+function login_form() {
+  const emailInput_login = document.getElementById("email1").value;
+  const passwordInput_login = document.getElementById('password1').value;
+  const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?])[A-Za-z\d!@#$%^&*()_\-+=<>?]{8,}$/;
+ if (!emailregex.test(emailInput_login)) {
+    document.getElementById('emailError1').innerHTML = "Please enter a valid email-id";
+  } else if (!passwordregex.test(passwordInput_login)) {
+    document.getElementById('passwordError1').innerHTML = "Password must contain 1 uppercase, 1 lowercase, and special symbols";
+  } else {
+    document.getElementById("emailError1").innerHTML = "";
+    document.getElementById('passwordError1').innerHTML = "";
+  }
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://localhost:3000/Signup");
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText)
+      var card = "";
+      const objects = JSON.parse(this.responseText);
+      for (let object of objects) {
+}
+    }
+  }
+}
+
+
+
+
+load_cards = () => {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/Cards");
   xhttp.send();
-xhttp.onreadystatechange = function (){
-  if (this.readyState == 4 && this.status == 200) {
-  console.log(this.responseText)
-  var card = "";
-  const objects = JSON.parse(this.responseText);
-  for (let object of objects) {
-card += '<div class="col-md-4">';
-card +='<div class="card mb-4 glowing-border">';
-card +='<img src="'+ object["Photo"]+'" class="card-img-top" alt="Architecture 1">';
-card += '<div class="card-body">';
-card +="<h5 class='card-title'>" + object["Price"] + "</h5>";
-card += '<p class="card-text">'+object["Description"]+ '</p>';
-card += '<a href="#" class="btn btn-primary glowing-button">Buy Now</a>';
-card +=  '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>'+object["Location"]+'</address>';
-card += '</div>';
-card += '</div>';
-card += '</div>';
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText)
+      var card = "";
+      const objects = JSON.parse(this.responseText);
+      for (let object of objects) {
+        card += '<div class="col-md-4">';
+        card += '<div class="card mb-4 glowing-border">';
+        card += '<img src="' + object["Photo"] + '" class="card-img-top" alt="Architecture 1">';
+        card += '<div class="card-body">';
+        card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
+        card += '<p class="card-text">' + object["Description"] + '</p>';
+        card += '<a href="#" class="btn btn-primary glowing-button">Buy Now</a>';
+        card += '<address class="card-foot"><br><i class="heartcard align-right fa-solid fa-heart fa-xl"></i><i class="fa-solid fa-location-dot ms-5"></i>' + object["Location"] + '</address>';
+        card += '</div>';
+        card += '</div>';
+        card += '</div>';
+      }
+      document.getElementById('dynamiccard').innerHTML = card;
+    }
+  };
 }
-document.getElementById('dynamiccard').innerHTML = card;
+load_cards();
+
+function togglePasswordVisibility() {
+  var passwordInput = document.getElementById("password1");
+  var toggleButton = document.getElementById("togglePassword");
+  
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    toggleButton.innerHTML = '<i class="bi bi-eye-slash"></i>';
+  } else {
+    passwordInput.type = "password";
+    toggleButton.innerHTML = '<i class="bi bi-eye"></i>';
+  }
 }
-};
-}
-create_cards();
