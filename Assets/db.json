@@ -6,78 +6,10 @@
       "email": "sharonantony2408@gmail.com",
       "password": "Basket9486!",
       "confirm_password": "Basket9486!"
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 2
-    },
-    {
-      "name": "Arun",
-      "email": "aaronantony@gmail.com",
-      "password": ";;jhkjkk",
-      "confirm_password": "",
-      "id": 3
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Sha12@",
-      "confirm_password": "Sha12@",
-      "id": 4
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
-      "password": "SHa123@",
-      "confirm_password": "SHa123@",
-      "id": 5
-    },
-    {
-      "name": "sha",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 6
-    },
-    {
-      "name": "sha",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 7
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 8
-    },
-    {
-      "name": "Alfin ",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 9
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 10
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 11
     }
+    
   ],
+  
   "Cards": [
     {
       "id": 1,
@@ -94,18 +26,22 @@
       "Location": "Selvapuram"
     },
     {
-      "id": 2,
+      "id": 3,
       "Photo": "/Assets/images/house1.jpeg",
       "Price": "80,00,000",
       "Description": "2BHK Apartment with full furnished facility feel free to contact",
       "Location": "Selvapuram"
     },
     {
-      "id": 2,
+      "id": 4,
       "Photo": "/Assets/images/house1.jpeg",
       "Price": "80,00,000",
       "Description": "2BHK Apartment with full furnished facility feel free to contact",
       "Location": "Selvapuram"
     }
+  ],
+  "Favourites":
+  [
+    
   ]
 }

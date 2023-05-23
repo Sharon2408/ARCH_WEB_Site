@@ -98,7 +98,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" onclick="validate_login()" class="btn btn-outline-dark">LogIn</button>
+                <button type="button" onclick="validate_login()" id="myModalButton" class="btn btn-outline-dark">LogIn</button>
               </div>
             </div>
           </div>
@@ -174,12 +174,88 @@
   <br>
   <br>
   <!-- CARDS -->
+  <div><button  class="btn btn-primary ms-5 custom-button glowing-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+    type="button">Add New House</button>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="text-center modal-title" id="exampleModalLabel">ADD NEW HOUSE</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Price -->
+          <label class="form-label">Price</label>
+          <input type="text" oninput="" class="form-control" id="price">
+          <small id="nameError" class="text-danger"></small>
+          <!-- Description -->
+          <br>
+          <label class="form-label">Description</label>
+          <input type="text" oninput="" class="form-control" id="desc">
+          <small id="emailError" class="text-danger"></small>
+          <!-- Location -->
+          <br>
+          <label class="form-label">Location</label>
+          <input type="text" oninput="" class="form-control" id="location">
+          <small id="" class="text-danger"></small>
+          <!-- Photo -->
+          <br>
+          <label class="form-label">Photo</label>
+          <input type="file" oninput="" class="form-control"
+            id="photo" name="photo">
+          <small id="confirmpasswordError" class="text-danger"></small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" onclick="create_cards()" class="btn btn-outline-dark">ADD House</button>
+        </div>
+      </div>
+    </div>
+  </div></div>
   <div class="container" id="cards">
     <div class="row" id="dynamiccard">
       <div class="col-md-4">
-
+        
       </div>
     </div>
+  </div>
+</div>
+</div>
+<br><br>
+
+<!-- FOOTER -->
+<footer class="bg-secondary text-light">
+  <div class="container">
+    <div class="row">
+      <div id="foottext" class="col-md-4">
+        <h5>About Us</h5>
+        <p>We are known for our dream houses and architects to provide world class infrastructure</p>
+      </div>
+      <div class="col-md-4" id="foottext">
+        <h5>Contact</h5>
+        <ul class="list-unstyled" >
+          <li>Phone: 123-456-7890</li>
+          <li>Email: info@arch_web.com</li>
+          <li>Address: 123 Main Street, Coimbatore-08</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5 id="foottext">Follow Us</h5>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fab fa-facebook"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark text-center py-2">
+    <p>&copy; 2023 Arch_Web. All rights reserved.</p>
+  </div>
+</footer>
+
+
 </body>
 
 </html>
