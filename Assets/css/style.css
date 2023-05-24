@@ -8,15 +8,17 @@
 .heartcard:hover{
   color: #f30000f3;
 }
-#search::placeholder{
+#search1::placeholder{
   color: #000;
 }
 #search {
   border-radius: 30px;
   background-color: #221b1b00;
-  color: rgb(14, 14, 15);
 }
-
+#search1{
+  border-radius: 30px;
+  background-color: #221b1b00;
+}
 #login {
   text-decoration: none;
   color: green;

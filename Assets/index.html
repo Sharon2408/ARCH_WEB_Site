@@ -58,11 +58,11 @@
         <a href="http://" class="ms-5 mt-2 heart" target="_blank" rel="noopener noreferrer"><i
             class="fa-solid fa-cart-shopping fa-xl"></i></a>
         <!-- SEARCH -->
-        <form class="d-flex" method="get" onsubmit="">
-          <input id="search" class="form-control ms-5 " type="search" placeholder="Search" aria-label="Search">
+        <form  class="d-flex" id="form" method="get" onsubmit="">
+          <input id="search1"  class="form-control ms-5 " type="search" placeholder="Search" aria-label="Search">
           <button id="search" class="btn btn-outline-dark" type="submit"><i
               class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
+      
         <!-- LOGIN -->
         <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
           type="button">LOGIN</button>
@@ -76,19 +76,19 @@
               <div class="modal-body">
                 <!-- EMAIL ID -->
                 <br>
-                <label class="form-label">Email</label>
+                <label for="email1"  class="form-label">Email</label>
                 <input type="email" oninput="login_form()" class="form-control" id="email1">
                 <small id="emailError1" class="text-danger"></small>
                 <!-- PASSWORD -->
                 <br>
-                <label class="form-label">Password</label>
+                <label for="password1" class="form-label">Password</label>
                 <input type="password" oninput="login_form()" class="form-control" id="password1">
                 <small id="passwordError1" class="text-danger"></small>
                  <!-- Remember Password Checkbox -->
                  <br>
                  <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="rememberPassword">
-                  <label class="form-check-label" for="rememberPassword">
+                  <label  class="form-check-label" for="rememberPassword">
                     Remember Password
                   </label>
                 </div>
@@ -120,22 +120,22 @@
                 </div>
                 <div class="modal-body">
                   <!-- NAME -->
-                  <label class="form-label">Name</label>
+                  <label autocomplete="off" for="name" class="form-label">Name</label>
                   <input type="text" oninput="validate_name()" class="form-control" id="name">
                   <small id="nameError" class="text-danger"></small>
                   <!-- EMAIL ID -->
                   <br>
-                  <label class="form-label">Email</label>
+                  <label for="email" class="form-label">Email</label>
                   <input type="email" oninput="validate_email()" class="form-control" id="email">
                   <small id="emailError" class="text-danger"></small>
                   <!-- PASSWORD -->
                   <br>
-                  <label class="form-label">Password</label>
+                  <label for="password" class="form-label">Password</label>
                   <input type="password" oninput="validate_password()" class="form-control" id="password">
                   <small id="passwordError" class="text-danger"></small>
                   <!-- confirmpassword -->
                   <br>
-                  <label class="form-label">Confirm Password</label>
+                  <label for="confirmpassword" class="form-label">Confirm Password</label>
                   <input type="password" oninput="validate_confirmpassword();" class="form-control"
                     id="confirmpassword">
                   <small id="confirmpasswordError" class="text-danger"></small>
@@ -151,7 +151,7 @@
             </div>
           </div>
         </div>
-
+      </form>
 
 
       </div>
@@ -174,7 +174,8 @@
   <br>
   <br>
   <!-- CARDS -->
-  <div><button  class="btn btn-primary ms-5 custom-button glowing-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+  <div>
+      <button  class="btn btn-primary ms-5 custom-button glowing-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
     type="button">Add New House</button>
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -186,22 +187,22 @@
         </div>
         <div class="modal-body">
           <!-- Price -->
-          <label class="form-label">Price</label>
+          <label for="price"  class="form-label">Price</label>
           <input type="text" oninput="" class="form-control" id="price">
           <small id="nameError" class="text-danger"></small>
           <!-- Description -->
           <br>
-          <label class="form-label">Description</label>
+          <label for="desc" class="form-label">Description</label>
           <input type="text" oninput="" class="form-control" id="desc">
           <small id="emailError" class="text-danger"></small>
           <!-- Location -->
           <br>
-          <label class="form-label">Location</label>
+          <label for="location" class="form-label">Location</label>
           <input type="text" oninput="" class="form-control" id="location">
           <small id="" class="text-danger"></small>
           <!-- Photo -->
           <br>
-          <label class="form-label">Photo</label>
+          <label for="photo" class="form-label">Photo</label>
           <input type="file" oninput="" class="form-control"
             id="photo" name="photo">
           <small id="confirmpasswordError" class="text-danger"></small>
@@ -213,6 +214,7 @@
       </div>
     </div>
   </div></div>
+</form>
   <div class="container" id="cards">
     <div class="row" id="dynamiccard">
       <div class="col-md-4">

@@ -150,14 +150,14 @@ function login_form() {
             '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
           card += "<strong>Welcome!" + object["name"] + "</strong>";
           card +=
-            ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            ' <button type="button" class="close" data-dismiss="alert" data-bs-dismiss="modal" aria-label="Close">';
           card += '   <span aria-hidden="true">&times;</span>';
           card += "  </button>";
           card += "</div>";
           document.getElementById("alert").innerHTML = card;
           // Hide the alert after 3 seconds
           setTimeout(function () {
-            $("#alert").hide();
+            $("#alert").show();
           }, 5000);
         } else {
           card +=
@@ -184,12 +184,12 @@ load_cards = () => {
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
+      // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
       for (let object of objects) {
-        card += '<div class="col-md-4">';
-        card += '<div class="card mb-4 glowing-border">';
+        card += '<div  class="col-md-4">';
+        card += '<div  class="card mb-4 glowing-border">';
         card +=
           '<img src="' +
           object["Photo"] +
@@ -198,9 +198,9 @@ load_cards = () => {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text">' + object["Description"] + "</p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button">Buy Now</a>';
+          '<a href="#" class="btn btn-primary  glowing-button" onclick="addto_favourites(' + object["id"] + ');">Buy Now</a>';
         card +=
-          '<address class="card-foot"><br><i onclick="displayFavorites();" class="heartcard align-right fa-solid fa-heart fa-xl"></i><i class="fa-solid fa-location-dot ms-5"></i>' +
+          '<address class="card-foot"><br><i  class="heartcard align-right fa-solid fa-heart fa-xl"></i><i class="fa-solid fa-location-dot ms-5"></i>' +
           object["Location"] +
           "</address>";
         card += "</div>";
@@ -213,28 +213,132 @@ load_cards = () => {
 };
 load_cards();
 
+
 create_cards = () => {
-const price = document.getElementById('price').value;
-const desc = document.getElementById('desc').value;
-const location = document.getElementById('location').value;
-const image = document.getElementById('photo').value;
-const file = "Assets/images/" + image.file[0].name;
-const xhttp = new XMLHttpRequest();
-xhttp.open("POST", "http://localhost:3000/Cards/");
-xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xhttp.send(
-  JSON.stringify({
-    // >>json string
-    Price: price,
-    Description: desc,
-    location: location,
-    Image: file
-  })
-);
-xhttp.onreadystatechange = function () {
-  if (this.readyState == 4 && this.status == 200) {
-    load_cards();
-  }
-};
+  const price = document.getElementById('price').value;
+  const desc = document.getElementById('desc').value;
+  const location = document.getElementById('location').value;
+  const input = document.getElementById('photo');
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "http://localhost:3000/Cards/");
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(
+    JSON.stringify({
+      // >>json string
+      Price: price,
+      Description: desc,
+      Location: location,
+      Photo: "/Assets/images/house2.jpeg",
+    })
+  );
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      load_cards();
+    }
+  };
 }
-create_cards();
+
+
+function addto_favourites(id) {
+  const Favourites = [];
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/Cards/${id}`);
+  xhttp.send();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      console.log(id);
+      const itemDetails = JSON.parse(this.responseText);
+      console.log(itemDetails);
+
+      const xhttpAdd = new XMLHttpRequest();
+
+      xhttpAdd.open("POST", "http://localhost:3000/Favourites");
+      xhttpAdd.setRequestHeader("Content-Type", "application/json");
+      console.log("hello123")
+      xhttpAdd.onload = function () {
+
+
+        if (xhttpAdd.status == 200 && xhttpAdd.readystate == 4) {
+          console.log("hello");
+          console.log("hello555")
+          const response = JSON.parse(xhttpAdd.responseText);
+          Favourites.push(itemDetails);
+          load_cards();
+
+        }
+      };
+      xhttpAdd.send(JSON.stringify(itemDetails));
+
+
+    }
+  }
+}
+
+favourite_cards = () => {
+  var Favourites = [];
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://localhost:3000/Favourites");
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // console.log(this.responseText);
+      var card = "";
+      const objects = JSON.parse(this.responseText);
+      for (let object of objects) {
+        card += '<div  class="col-md-4">';
+        card += '<div  class="card mb-4 glowing-border">';
+        card +=
+          '<img src="' +
+          object["Photo"] +
+          '" class="card-img-top" alt="Architecture 1">';
+        card += '<div class="card-body">';
+        card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
+        card += '<p class="card-text">' + object["Description"] + "</p>";
+        card +=
+          '<a href="#" class="btn btn-primary  glowing-button" onclick="remove_favourites(' + object["id"] + ');">Buy Now</a>';
+        card +=
+          '<address class="card-foot"><br><i  class="heartcard align-right fa-solid fa-heart fa-xl"></i><i class="fa-solid fa-location-dot ms-5"></i>' +
+          object["Location"] +
+          "</address>";
+        card += "</div>";
+        card += "</div>";
+        card += "</div>";
+      }
+      if(card==''){
+        card += '<div class="container">'
+        card += '<div class="row" id="hidefavourite">'
+        card += '   <div class="col">'
+        card += ' <h1>My Favorites</h1>'
+        card += ' <p class="empty-message">You havent added anything to favorites yet.</p>'
+        card += '  <a href="/Assets/index.html#cards" class="btn btn-primary glowing-button">Add Now</a>'
+        card += ' </div>'
+        card += ' </div>'
+        card += ' </div> '
+      }
+      document.getElementById("favoritecards").innerHTML = card;
+    }
+  };
+};
+
+
+favourite_cards();
+
+remove_favourites = (id) =>{
+  console.log(id);
+    const xhttp = new XMLHttpRequest();
+    xhttp.open(`DELETE`, `"http://localhost:3000/Favourites/${id}`);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(
+      JSON.stringify({
+        id: id,
+      })
+    );
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        const objects = JSON.parse(this.responseText)
+      
+      }
+    
+    };
+}

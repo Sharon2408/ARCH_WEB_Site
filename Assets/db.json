@@ -6,10 +6,29 @@
       "email": "sharonantony2408@gmail.com",
       "password": "Basket9486!",
       "confirm_password": "Basket9486!"
+    },
+    {
+      "name": "Sharon D",
+      "email": "sharonantony2408@gmail.com",
+      "password": "Basket9486!",
+      "confirm_password": "Basket9486!",
+      "id": 2
+    },
+    {
+      "name": "SharonD",
+      "email": "sharon@gmail.com",
+      "password": "Basket9486!",
+      "confirm_password": "Basket9486!",
+      "id": 3
+    },
+    {
+      "name": "ShrD",
+      "email": "sharonan@h.com",
+      "password": "Basket9486!",
+      "confirm_password": "Basket9486!",
+      "id": 4
     }
-    
   ],
-  
   "Cards": [
     {
       "id": 1,
@@ -20,14 +39,14 @@
     },
     {
       "id": 2,
-      "Photo": "/Assets/images/house1.jpeg",
+      "Photo": "/Assets/images/house2.jpeg",
       "Price": "80,00,000",
       "Description": "2BHK Apartment with full furnished facility feel free to contact",
       "Location": "Selvapuram"
     },
     {
       "id": 3,
-      "Photo": "/Assets/images/house1.jpeg",
+      "Photo": "/Assets/images/house3.jpeg",
       "Price": "80,00,000",
       "Description": "2BHK Apartment with full furnished facility feel free to contact",
       "Location": "Selvapuram"
@@ -38,10 +57,64 @@
       "Price": "80,00,000",
       "Description": "2BHK Apartment with full furnished facility feel free to contact",
       "Location": "Selvapuram"
+    },
+    {
+      "id": 5,
+      "Photo": "/Assets/images/house2.jpeg",
+      "Price": "80,00,000",
+      "Description": "2BHK Apartment with full furnished facility feel free to contact",
+      "Location": "Selvapuram"
+    },
+    {
+      "id": 6,
+      "Photo": "/Assets/images/house3.jpeg",
+      "Price": "80,00,000",
+      "Description": "2BHK Apartment with full furnished facility feel free to contact",
+      "Location": "Selvapuram"
+    },
+    {
+      "Price": "20,00,000",
+      "Description": "3BHK",
+      "Location": "Selvapuram",
+      "Photo": "/Assets/images/house1.jpeg",
+      "id": 8
+    },
+    {
+      "Price": "1200",
+      "Description": "hgvbbch",
+      "Location": "gvg",
+      "Photo": "/Assets/images/house2.jpeg",
+      "id": 9
+    },
+    {
+      "Photo": "/Assets/images/house3.jpeg",
+      "Price": "20,00,000",
+      "Description": "3BHK",
+      "Location": "Selvapuram",
+      "id": 10
+    },
+    {
+      "Price": "20,00,000",
+      "Description": "hgvbbch",
+      "Location": "Selvapuram",
+      "Photo": "/Assets/images/house1.jpeg",
+      "id": 11
+    },
+    {
+      "Price": "4567555",
+      "Description": "hgvbbch",
+      "Location": "gvg",
+      "Photo": "/Assets/images/house2.jpeg",
+      "id": 12
     }
   ],
-  "Favourites":
-  [
-    
+  "Favourites": [
+    {
+      "id": 1,
+      "Photo": "/Assets/images/house1.jpeg",
+      "Price": "78,00,000",
+      "Description": "3BHK House with a good interior all at your doorstep designs as you wish",
+      "Location": "Coimbatore"
+    }
   ]
 }
