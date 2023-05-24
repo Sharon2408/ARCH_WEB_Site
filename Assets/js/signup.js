@@ -198,9 +198,10 @@ load_cards = () => {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text">' + object["Description"] + "</p>";
         card +=
-          '<a href="#" class="btn btn-primary  glowing-button" onclick="addto_favourites(' + object["id"] + ');">Buy Now</a>';
-        card +=
-          '<address class="card-foot"><br><i  class="heartcard align-right fa-solid fa-heart fa-xl"></i><i class="fa-solid fa-location-dot ms-5"></i>' +
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton">Buy Now</a>'+'&nbsp&nbsp';
+          card +='<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="addto_favourites(' + object["id"] + ');">favorite +</a>'
+          card +=
+          '<address class="card-foot"><br><i class="fa-solid fa-location-dot "></i>' +
           object["Location"] +
           "</address>";
         card += "</div>";
@@ -285,6 +286,7 @@ favourite_cards = () => {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
+      document.getElementById
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
@@ -294,11 +296,12 @@ favourite_cards = () => {
           '" class="card-img-top" alt="Architecture 1">';
         card += '<div class="card-body">';
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
-        card += '<p class="card-text">' + object["Description"] + "</p>";
+        card += '<p class="card-text"><b>' + object["Description"] + "</b></p>";
         card +=
-          '<a href="#" class="btn btn-primary  glowing-button" onclick="remove_favourites(' + object["id"] + ');">Buy Now</a>';
-        card +=
-          '<address class="card-foot"><br><i  class="heartcard align-right fa-solid fa-heart fa-xl"></i><i class="fa-solid fa-location-dot ms-5"></i>' +
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" >Buy Now</a>'+'&nbsp&nbsp';
+          card +='<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="remove_favourites(' + object["id"] + ');">Remove</a>'
+          card +=
+          '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>' +
           object["Location"] +
           "</address>";
         card += "</div>";
@@ -330,15 +333,14 @@ remove_favourites = (id) =>{
     xhttp.open(`DELETE`, `"http://localhost:3000/Favourites/${id}`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(
-      JSON.stringify({
-        id: id,
-      })
-    );
+      JSON.stringify({ id: id, }));
     xhttp.onreadystatechange = function () {
+      console.log(id);
       if (this.readyState == 4) {
-        const objects = JSON.parse(this.responseText)
+        const objects = JSON.parse(this.responseText);
       
       }
     
     };
+    load_cards();
 }

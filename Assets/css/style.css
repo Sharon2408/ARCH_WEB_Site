@@ -108,3 +108,20 @@ h1 {
 #foottext{
   color: #000;
 }
+
+/* Heart Button */
+
+.darkButton {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.smallButton {
+  padding: 6px 12px;
+  font-size: 12px;
+}

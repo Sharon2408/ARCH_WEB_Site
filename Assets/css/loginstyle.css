@@ -1,0 +1,105 @@
+body {
+    background-color: #111;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('attractive_background_image.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+    filter: blur(4px);
+  }
+  
+  .glass-login-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(98px);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  h2 {
+    color: #333;
+    margin-top: 0;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+  }
+  
+  button.glowbutton {
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+    animation: glowing 2s infinite;
+  }
+  
+  @keyframes glowing {
+    0% {
+      box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(29, 185, 84, 0.7), 0 0 40px rgba(29, 185, 84, 0.5);
+    }
+    100% {
+      box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+    }
+  }
+  
+  
+  .glowing-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glowing-button::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(#00ff99, #0000);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  
+  .glowing-button:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
