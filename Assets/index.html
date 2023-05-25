@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/ec8917219d.js" crossorigin="anonymous"></script>
   <script src="/Assets/js/bootstrap.bundle.min.js"></script>
-  <script src="/Assets/js/signup.js"></script>
   <link rel="stylesheet" href="/Assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="/Assets/css/style.css">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -53,15 +52,15 @@
           </li>
         </ul>
         <!-- HEART AND KART ICON -->
-        <a href="/Assets/favourites.html" class="ms-5 mt-2 heart" rel="noopener noreferrer"><i
+        <a href="/Assets/favourites.html" class="mt-2 heart" rel="noopener noreferrer"><i
             class=" align-right fa-solid fa-heart fa-xl"></i></a>
-        <a href="http://" class="ms-5 mt-2 heart" target="_blank" rel="noopener noreferrer"><i
+        <a href="http://" class="ms-3 mt-2 heart" target="_blank" rel="noopener noreferrer"><i
             class="fa-solid fa-cart-shopping fa-xl"></i></a>
         <!-- SEARCH -->
-        <form  class="d-flex" id="form" method="get" onsubmit="">
-          <input id="search1"  class="form-control ms-5 " type="search" placeholder="Search" aria-label="Search">
+        <!-- <form  class="d-flex" id="form" method="get" > -->
+          <!-- <input id="search1"  class="form-control ms-5 " type="search" placeholder="Search" aria-label="Search">
           <button id="search" class="btn btn-outline-dark" type="submit"><i
-              class="fa-solid fa-magnifying-glass"></i></button>
+              class="fa-solid fa-magnifying-glass"></i></button> -->
       
         <!-- LOGIN -->
         <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -77,12 +76,12 @@
                 <!-- EMAIL ID -->
                 <br>
                 <label for="email1"  class="form-label">Email</label>
-                <input type="email" oninput="login_form()" class="form-control" id="email1">
+                <input type="email"  class="form-control" id="email1">
                 <small id="emailError1" class="text-danger"></small>
                 <!-- PASSWORD -->
                 <br>
                 <label for="password1" class="form-label">Password</label>
-                <input type="password" oninput="login_form()" class="form-control" id="password1">
+                <input type="password"  class="form-control" id="password1">
                 <small id="passwordError1" class="text-danger"></small>
                  <!-- Remember Password Checkbox -->
                  <br>
@@ -151,7 +150,7 @@
             </div>
           </div>
         </div>
-      </form>
+      <!-- </form> -->
 
 
       </div>
@@ -175,8 +174,8 @@
   <br>
   <!-- CARDS -->
   <div>
-      <button  class="btn btn-primary ms-5 custom-button glowing-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-    type="button">Add New House</button>
+      <!-- <button  class="btn btn-primary ms-5 custom-button glowing-button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+    type="button">Add New House</button> -->
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -216,7 +215,7 @@
   </div></div>
 </form>
   <div class="container" id="cards">
-    <div class="row" id="dynamiccard">
+    <div class="row" id="dynamic_card">
       <div class="col-md-4">
         
       </div>
@@ -257,7 +256,8 @@
   </div>
 </footer>
 
-
+<script src="/Assets/js/signup.js"></script>
+<script src="/Assets/js/login.js"></script>
 </body>
 
 </html>

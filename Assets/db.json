@@ -1,32 +1,11 @@
 {
   "Signup": [
     {
-      "id": 1,
-      "name": "Sharon",
-      "email": "sharonantony2408@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!"
-    },
-    {
-      "name": "Sharon D",
-      "email": "sharonantony2408@gmail.com",
+      "email": "chicken959730@gmail.com",
       "password": "Basket9486!",
       "confirm_password": "Basket9486!",
-      "id": 2
-    },
-    {
-      "name": "SharonD",
-      "email": "sharon@gmail.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 3
-    },
-    {
-      "name": "ShrD",
-      "email": "sharonan@h.com",
-      "password": "Basket9486!",
-      "confirm_password": "Basket9486!",
-      "id": 4
+      "Logged": 1,
+      "id": 1
     }
   ],
   "Cards": [
@@ -50,78 +29,7 @@
       "Price": "80,00,000",
       "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
       "Location": "Selvapuram"
-    },
-    {
-      "id": 4,
-      "Photo": "/Assets/images/house1.jpeg",
-      "Price": "80,00,000",
-      "Description": "Coastal Serenity: Capture the essence of beachfront living with light tones, natural textures, and nautical elements, creating a soothing and tranquil space inspired by the coastal lifestyle.",
-      "Location": "Selvapuram"
-    },
-    {
-      "id": 5,
-      "Photo": "/Assets/images/house2.jpeg",
-      "Price": "80,00,000",
-      "Description": "Modern Elegance: Embrace sleek lines, luxurious materials, and a monochromatic color palette that epitomize modern elegance, offering a sophisticated and timeless ambiance.",
-      "Location": "Selvapuram"
-    },
-    {
-      "id": 6,
-      "Photo": "/Assets/images/house3.jpeg",
-      "Price": "80,00,000",
-      "Description": "Rustic Charm: Explore the warmth and coziness of rustic design, featuring distressed wood, earthy tones, and cozy furnishings that evoke a sense of comfort and nostalgia.",
-      "Location": "Selvapuram"
-    },
-    {
-      "Price": "20,00,000",
-      "Description": "Mid-Century Modern: Take a trip back in time with mid-century modern design, characterized by iconic furniture pieces, organic shapes, and a blend of simplicity and functionality.",
-      "Location": "Selvapuram",
-      "Photo": "/Assets/images/house1.jpeg",
-      "id": 8
-    },
-    {
-      "Price": "1200",
-      "Description": "hgvbbch",
-      "Location": "Art Deco Glamour: Indulge in the opulence and glamour of the art deco era, featuring bold geometric patterns, luxurious materials, and a sense of decadence that exudes sophistication.",
-      "Photo": "/Assets/images/house2.jpeg",
-      "id": 9
-    },
-    {
-      "Photo": "/Assets/images/house3.jpeg",
-      "Price": "20,00,000",
-      "Description": "Eclectic Fusion: Unleash your creativity with an eclectic fusion of styles, merging different eras, cultures, and design elements to create a unique and personalized space.",
-      "Location": "Selvapuram",
-      "id": 10
-    },
-    {
-      "Price": "20,00,000",
-      "Description": "Rustic Charm: Explore the warmth and coziness of rustic design, featuring distressed wood, earthy tones, and cozy furnishings that evoke a sense of comfort and nostalgia.",
-      "Location": "Selvapuram",
-      "Photo": "/Assets/images/house1.jpeg",
-      "id": 11
-    },
-    {
-      "Price": "4567555",
-      "Description": "hgvbbch",
-      "Location": "Zen Retreat: Create a serene and harmonious sanctuary with Zen-inspired design, emphasizing natural materials, minimalism, and a focus on balance and tranquility, promoting relaxation and mindfulness.",
-      "Photo": "/Assets/images/house2.jpeg",
-      "id": 12
     }
   ],
-  "Favourites": [
-    {
-      "id": 1,
-      "Photo": "/Assets/images/house1.jpeg",
-      "Price": "78,00,000",
-      "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
-      "Location": "Coimbatore"
-    },
-    {
-      "id": 3,
-      "Photo": "/Assets/images/house3.jpeg",
-      "Price": "80,00,000",
-      "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
-      "Location": "Selvapuram"
-    }
-  ]
+  "Favourites": []
 }

@@ -186,3 +186,26 @@
     <script src="js/app.js"></script>
   </body>
 </html> -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prevent Default Example</title>
+</head>
+<body>
+  <form id="myForm">
+    <input type="text" name="username" placeholder="Username">
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Custom actions
+      var username = event.target.elements.username.value;
+      console.log("Submitted username:", username);
+      alert("Hello, " + username + "! Form submission prevented.");
+    });
+  </script>
+</body>
+</html>

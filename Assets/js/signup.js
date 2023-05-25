@@ -5,16 +5,21 @@ function validate() {
   const passwordInput = document.getElementById("password").value;
   const confirmpasswordInput = document.getElementById("confirmpassword").value;
   if (!nameInput || !emailInput || !passwordInput || !confirmpasswordInput) {
-    document.getElementById("nameError").innerHTML = "Name cannot be empty";
+    document.getElementById("nameError").innerHTML =
+      "Name cannot be empty";
     document.getElementById("emailError").innerHTML =
       "Email-ID cannot be empty";
     document.getElementById("passwordError").innerHTML =
       "Password cannot be empty";
     document.getElementById("confirmpasswordError").innerHTML =
       "Confirm Password cannot be empty";
-  } else {
-    Signup();
   }
+  else if (passwordInput != confirmpasswordInput) {
+    document.getElementById("confirmpasswordError").innerHTML = "Password should match Confirm Password";
+  }
+  else
+    Signup();
+
 }
 
 // Name Validation
@@ -69,12 +74,12 @@ function validate_confirmpassword() {
 }
 
 // SignUp informations json
-function Signup() {
+function Signup(event) {
   const user_name = document.getElementById("name").value;
   const user_email = document.getElementById("email").value;
   const user_password = document.getElementById("password").value;
   const user_confirmpassword = document.getElementById("confirmpassword").value;
-
+  var log = 0;
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "http://localhost:3000/Signup");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -84,6 +89,7 @@ function Signup() {
       email: user_email,
       password: user_password,
       confirm_password: user_confirmpassword,
+      Logged: log,
     })
   );
   xhttp.onreadystatechange = function () {
@@ -98,87 +104,9 @@ function Signup() {
   };
 }
 
-//LOGIN
-function validate_login() {
-  const emailInput_login = document.getElementById("email1").value;
-  const passwordInput_login = document.getElementById("password1").value;
-  if (!emailInput_login || !passwordInput_login) {
-    document.getElementById("emailError1").innerHTML = "Email cannot be empty";
-    document.getElementById("passwordError1").innerHTML =
-      "Password cannot be empty";
-  } else {
-    login_form();
-  }
-}
 
-function login_form() {
-  const emailInput_login = document.getElementById("email1").value;
-  const passwordInput_login = document.getElementById("password1").value;
-  const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordregex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?])[A-Za-z\d!@#$%^&*()_\-+=<>?]{8,}$/;
-  if (!emailregex.test(emailInput_login)) {
-    document.getElementById("emailError1").innerHTML =
-      "Please enter a valid email-id";
-  } else if (!passwordregex.test(passwordInput_login)) {
-    document.getElementById("passwordError1").innerHTML =
-      "Password must contain 1 uppercase, 1 lowercase, and special symbols";
-  } else {
-    document.getElementById("emailError1").innerHTML = "";
-    document.getElementById("passwordError1").innerHTML = "";
-  }
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/Signup");
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-      var card = "";
-      const objects = JSON.parse(this.responseText);
-      for (let object of objects) {
-        if (
-          object["email"] == emailInput_login &&
-          object["password"] == passwordInput_login
-        ) {
-          $(document).ready(function () {
-            $("#myModalButton").click(function () {
-              $("#exampleModal").modal("hide");
-            });
-          });
 
-          card +=
-            '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-          card += "<strong>Welcome!" + object["name"] + "</strong>";
-          card +=
-            ' <button type="button" class="close" data-dismiss="alert" data-bs-dismiss="modal" aria-label="Close">';
-          card += '   <span aria-hidden="true">&times;</span>';
-          card += "  </button>";
-          card += "</div>";
-          document.getElementById("alert").innerHTML = card;
-          // Hide the alert after 3 seconds
-          setTimeout(function () {
-            $("#alert").show();
-          }, 5000);
-        } else {
-          card +=
-            '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-          card += "<strong>Invalid Credentials</strong>";
-          card +=
-            ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
-          card += '   <span aria-hidden="true">&times;</span>';
-          card += "  </button>";
-          card += "</div>";
-          document.getElementById("alert").innerHTML = card;
-          setTimeout(function () {
-            $("#alert").hide();
-          }, 5000);
-        }
-      }
-    }
-  };
-}
-
-load_cards = () => {
+function load_cards() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/Cards");
   xhttp.send();
@@ -198,9 +126,9 @@ load_cards = () => {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text">' + object["Description"] + "</p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton">Buy Now</a>'+'&nbsp&nbsp';
-          card +='<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="addto_favourites(' + object["id"] + ');">favorite +</a>'
-          card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton">Buy Now</a>' + '&nbsp&nbsp';
+        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="addto_favourites(' + object["id"] + ');">favorite +</a>'
+        card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot "></i>' +
           object["Location"] +
           "</address>";
@@ -208,7 +136,7 @@ load_cards = () => {
         card += "</div>";
         card += "</div>";
       }
-      document.getElementById("dynamiccard").innerHTML = card;
+      $("#dynamic_card").html(card);
     }
   };
 };
@@ -286,7 +214,6 @@ favourite_cards = () => {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
-      document.getElementById
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
@@ -298,9 +225,9 @@ favourite_cards = () => {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text"><b>' + object["Description"] + "</b></p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" >Buy Now</a>'+'&nbsp&nbsp';
-          card +='<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="remove_favourites(' + object["id"] + ');">Remove</a>'
-          card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" >Buy Now</a>' + '&nbsp&nbsp';
+        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="remove_favourites(' + object["id"] + ');">Remove</a>'
+        card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>' +
           object["Location"] +
           "</address>";
@@ -308,7 +235,7 @@ favourite_cards = () => {
         card += "</div>";
         card += "</div>";
       }
-      if(card==''){
+      if (card == '') {
         card += '<div class="container">'
         card += '<div class="row" id="hidefavourite">'
         card += '   <div class="col">'
@@ -319,28 +246,120 @@ favourite_cards = () => {
         card += ' </div>'
         card += ' </div> '
       }
-      document.getElementById("favoritecards").innerHTML = card;
+      $("#favoritecards").html(card);
     }
   };
 };
-
-
 favourite_cards();
 
-remove_favourites = (id) =>{
+remove_favourites = (id) => {
   console.log(id);
-    const xhttp = new XMLHttpRequest();
-    xhttp.open(`DELETE`, `"http://localhost:3000/Favourites/${id}`);
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(
-      JSON.stringify({ id: id, }));
-    xhttp.onreadystatechange = function () {
-      console.log(id);
-      if (this.readyState == 4) {
-        const objects = JSON.parse(this.responseText);
-      
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(`DELETE`, `http://localhost:3000/Favourites/${id}`);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(
+    JSON.stringify({ id: id }));
+  xhttp.onreadystatechange = () => {
+    console.log(id);
+    if (xhttp.readyState == 4) {
+      const objects = JSON.parse(xhttp.responseText);
+
+
+    }
+
+  };
+  load_cards();
+}
+
+//LOGIN
+function validate_login() {
+  const emailInput_login = document.getElementById("email1").value;
+  const passwordInput_login = document.getElementById("password1").value;
+  const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordregex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?])[A-Za-z\d!@#$%^&*()_\-+=<>?]{8,}$/;
+  if (!emailInput_login || !passwordInput_login) {
+    document.getElementById("emailError1").innerHTML = "Email cannot be empty";
+    document.getElementById("passwordError1").innerHTML =
+      "Password cannot be empty";
+  }
+  else if (!emailregex.test(emailInput_login)) {
+    document.getElementById("emailError1").innerHTML =
+      "Please enter a valid email-id";
+  } else if (!passwordregex.test(passwordInput_login)) {
+    document.getElementById("passwordError1").innerHTML =
+      "Password must contain 1 uppercase, 1 lowercase, and special symbols";
+  } else {
+    document.getElementById("emailError1").innerHTML = "";
+    document.getElementById("passwordError1").innerHTML = "";
+  }
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/Signup`);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      const objects = JSON.parse(this.responseText);
+      var log = 1;
+      for (let object of objects) {
+        if (
+          object["email"] == emailInput_login &&
+          object["password"] == passwordInput_login
+        ) {
+          const updateRequest = new XMLHttpRequest();
+          updateRequest.open("PUT", `http://localhost:3000/Signup/${object['id']}`);
+          updateRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          updateRequest.send(
+            JSON.stringify({
+
+              name: object['username'],
+              email: object['email'],
+              password: object['password'],
+              confirm_password: object['confirm_password'],
+              Logged:log,
+            })
+          );
+          
+          updateRequest.send(JSON.stringify({
+            Logged: log,
+          }));
+          
+          $(document).ready(function () {
+            $("#myModalButton").click(function () {
+              $("#exampleModal").modal("hide");
+            });
+          });
+
+          card +=
+            '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
+          card += "<strong>Welcome!" + object["name"] + "</strong>";
+          card +=
+            ' <button type="button" class="close" data-dismiss="alert" data-bs-dismiss="modal" aria-label="Close">';
+          card += '   <span aria-hidden="true">&times;</span>';
+          card += "  </button>";
+          card += "</div>";
+          document.getElementById("alert").innerHTML = card;
+          count + 1;
+          // Hide the alert after 3 seconds
+          setTimeout(function () {
+            $("#alert").show();
+          }, 5000);
+        } 
+        else {
+          card +=
+            '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
+          card += "<strong>Invalid Credentials</strong>";
+          card +=
+            ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+          card += '   <span aria-hidden="true">&times;</span>';
+          card += "  </button>";
+          card += "</div>";
+          document.getElementById("alert").innerHTML = card;
+          setTimeout(function () {
+            $("#alert").hide();
+          }, 5000);
+        }
       }
-    
-    };
-    load_cards();
+    }
+  };
 }
