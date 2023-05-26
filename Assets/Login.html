@@ -3,7 +3,7 @@
 
 <head>
   <title>Login Page</title>
-  <script src="https://kit.fontawesome.com/ec8917219d.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://kit.fontawesome.com/ec8917219d.js" crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="css/loginstyle.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/bootstrap.bundle.min.js"></script>
@@ -16,7 +16,7 @@
 <body>
   <div class="login-form">
     <h2>Login</h2>
-    <button class="btn btn-outline-dark ms-3" type="button">Admin</button>
+    <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal2" type="button">Admin</button>
     <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
       type="button">User</button>
 
@@ -87,7 +87,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="text-center modal-title" id="exampleModalLabel">SIGN UP</h5>
+            <h5 class="text-center modal-title" id="exampleModalLabel">Sign Up</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -117,6 +117,33 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
             <a type="button" onclick="validate()" class="btn btn-outline-dark">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="adminlogin">
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="text-center modal-title" id="exampleModalLabel">Admin Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- EMAIL ID -->
+            <br>
+            <label for="email" class="form-label">Email</label>
+            <input type="email"  class="form-control" id="adminemail">
+            <small id="adminemailError" class="text-danger"></small>
+           <!-- PASSWORD -->
+           <br>
+           <label for="password" class="form-label">Password</label>
+           <input type="password" class="form-control" id="adminpassword">
+           <small id="adminpasswordError" class="text-danger"></small>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+            <a type="button" onclick="admin_login()" class="btn btn-outline-dark">Log In</a>
           </div>
         </div>
       </div>

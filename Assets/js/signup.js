@@ -127,8 +127,8 @@ function load_cards() {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text">' + object["Description"] + "</p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="Add_to_Cart(' + object["id"] + ');" >Buy Now</a>' + '&nbsp&nbsp';
-        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="addto_favourites(' + object["id"] + ');">favorite +</a>'
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="Add_to_Cart(' + object["id"] + ');" >Add to Cart</a>' + '&nbsp&nbsp';
+        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton mt-3" onclick="addto_favourites(' + object["id"] + ');">Add toFavorite +</a>'
         card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot "></i>' +
           object["Location"] +
@@ -192,10 +192,13 @@ function Buy_Now() {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
+      var totalQuantity = 0;
+      var totalAmount = 0;
+      card += '<h1 class="container-fluid">My Cart<br><a href="favourites.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Favourites</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>'
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
-        card +=
+        card += 
           '<img src="' +
           object["Photo"] +
           '" class="card-img-top" alt="Architecture 1">';
@@ -203,8 +206,8 @@ function Buy_Now() {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text"><b>' + object["Description"] + "</b></p>";
         card +=
-          '<a href="index.html" class="btn btn-primary glowing-button darkButton smallButton" >Buy Now</a>' + '&nbsp&nbsp';
-        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="remove_from_Cart(' + object["id"] + ');">Remove</a>'
+          '<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Favourites+</a>' + '&nbsp&nbsp';
+        card += '<a href="#" class="btn btn-warning glowing-button darkButton smallButton"   onclick="remove_from_Cart(' + object["id"] + ');">Remove</a>'
         card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>' +
           object["Location"] +
@@ -212,6 +215,8 @@ function Buy_Now() {
         card += "</div>";
         card += "</div>";
         card += "</div>";
+        totalQuantity += 1;
+        totalAmount += parseFloat(object["Price"])*1000;
       }
       if (card == '') {
         card += '<div class="container">'
@@ -224,7 +229,15 @@ function Buy_Now() {
         card += ' </div>'
         card += ' </div> '
       }
+      var totalCard = '';
+       totalCard = '<div class="total-summary">' +
+      '<p class="total-quantity">Total Quantity: <span id="totalQuantity">' + totalQuantity + '</span></p>' +
+      '<p class="total-amount">Total Amount:  ₹ <span id="totalQuantity">' + totalAmount.toFixed(2) + '</span></p>' +
+      '<button type="button" class="glowing-button btn btn-primary">Order Now</button>'+
+      '</div>';
+      console.log(totalQuantity,totalAmount)
       $("#Buycards").html(card);
+      $("#total").html(totalCard);
     }
   };
 };
@@ -321,6 +334,7 @@ favourite_cards = () => {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
+      card += '<h1 class="container-fluid">My Favourites<br><a href="buynow.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Cart</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>'
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
@@ -332,8 +346,8 @@ favourite_cards = () => {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text"><b>' + object["Description"] + "</b></p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick=Add_to_Cart(' + object["id"] + ') >Buy Now</a>' + '&nbsp&nbsp';
-        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton" onclick="remove_favourites(' + object["id"] + ');">Remove</a>'
+          '<a href="#" class="btn btn-success glowing-button darkButton smallButton ms-3" onclick=Add_to_Cart(' + object["id"] + ') >Add to Cart</a>' + '&nbsp&nbsp';
+        card += '<a href="#" class="btn btn-warning glowing-button darkButton smallButton mt-3" onclick="remove_favourites(' + object["id"] + ');">Remove from Favourites</a>'
         card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>' +
           object["Location"] +
@@ -413,6 +427,7 @@ function validate_login() {
           object["email"] == emailInput_login &&
           object["password"] == passwordInput_login
         ) {
+          
           const updateRequest = new XMLHttpRequest();
           updateRequest.open("PUT", `http://localhost:3000/Signup/${object['id']}`);
           updateRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -434,35 +449,63 @@ function validate_login() {
               console.log(this.responseText);
               const objects = JSON.parse(this.responseText);
               var card = '';
+             
               for (let object of objects) {
                 if (object['Logged'] = 1) {
-
-                   window.open("http://127.0.0.1:5500/Assets/index.html#")
-                   $("#loginbutton").hide();
-                    
+                  console.log(object['Logged'])
+                  const targetUrl = "http://127.0.0.1:5500/Assets/index.html";
+                  window.open(targetUrl, "_blank");
+                  
                   break;
                 }
-
-                else {
-                  document.getElementById("alert").innerHTML = card;
-                  $(document).ready(function () {
-                    $("#loginbutton").empty();
-                  });
-                }
+              
               }
             }
           };
           break;
           
         }
-        else{
-
+        else if( object["email"] !== emailInput_login &&
+        object["password"] !== passwordInput_login)
+        {
+window. alert("Username or Password is Incorrect")
         }
       }
     }
   }
 }
 
-function hide_buttton(){
-  
+admin_login = () =>{
+ const admin_email = document.getElementById('adminemail').value;
+ const admin_password = document.getElementById('adminpassword').value;
+ const xhttp = new XMLHttpRequest();
+ xhttp.open("GET", `http://localhost:3000/Admin`);
+ xhttp.send();
+ xhttp.onreadystatechange = function () {
+   if (this.readyState == 4 && this.status == 200) {
+     console.log(this.responseText);
+     const objects = JSON.parse(this.responseText);
+     var hide = '';
+     for (let object of objects) {
+      console.log(admin_email)
+       if (
+         object['admin_email'] == admin_email &&
+         object['admin_password'] == admin_password
+       ){
+        console.log(admin_email)
+       window.open("http://127.0.0.1:5500/Assets/admin.html");
+       hide += `<p>${object['admin_email']}</p>`+`<a class="btn btn-outline-dark ms-2 buttonhide"  type="button"
+       id="signupbutton">Logout</a>`
+       $("#loginitem").html(hide);
+       break;
+       }
+       
+       else{
+alert("Unauthorized Access")
+       }
+       
+     }
+     
+    }
+  }
 }
