@@ -1,35 +1,67 @@
 {
   "Signup": [
     {
-      "email": "chicken959730@gmail.com",
+      "email": "sharonantony2408@gmail.com",
       "password": "Basket9486!",
       "confirm_password": "Basket9486!",
       "Logged": 1,
-      "id": 1
+      "id": 2
+    },
+    {
+      "name": "Alfin ",
+      "email": "Sharon@g2techsoft.com",
+      "password": "Gmail@123",
+      "confirm_password": "Gmail@123",
+      "Logged": 0,
+      "id": 3
     }
   ],
   "Cards": [
     {
       "id": 1,
-      "Photo": "/Assets/images/house1.jpeg",
+      "Photo": "images/house1.jpeg",
       "Price": "78,00,000",
       "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
       "Location": "Coimbatore"
     },
     {
       "id": 2,
-      "Photo": "/Assets/images/house2.jpeg",
+      "Photo": "images/house2.jpeg",
       "Price": "80,00,000",
       "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
       "Location": "Selvapuram"
     },
     {
       "id": 3,
-      "Photo": "/Assets/images/house3.jpeg",
+      "Photo": "images/house3.jpeg",
       "Price": "80,00,000",
       "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
       "Location": "Selvapuram"
     }
   ],
-  "Favourites": []
+  "Favourites": [
+    {
+      "id": 2,
+      "Photo": "images/house2.jpeg",
+      "Price": "80,00,000",
+      "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
+      "Location": "Selvapuram"
+    }
+  ],
+  "Cart": [
+    {
+      "id": 1,
+      "Photo": "images/house1.jpeg",
+      "Price": "78,00,000",
+      "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
+      "Location": "Coimbatore"
+    },
+    {
+      "id": 2,
+      "Photo": "images/house2.jpeg",
+      "Price": "80,00,000",
+      "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
+      "Location": "Selvapuram"
+    }
+  ]
 }

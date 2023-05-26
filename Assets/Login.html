@@ -4,315 +4,125 @@
 <head>
   <title>Login Page</title>
   <script src="https://kit.fontawesome.com/ec8917219d.js" crossorigin="anonymous"></script>
-  <style>
-    body {
-      background: url("/Assets/images/loginbg.jpg") no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      position: relative;
-      z-index: -1;
-    }
-
-    .login-form {
-      backdrop-filter: blur(10px);
-      /* Frosted glass effect */
-      background-color: rgba(61, 61, 61, 0.3);
-      /* Translucent background */
-      border-radius: 20px;
-      box-shadow: 5px 5px 5px 2px rgba(53, 53, 53, 0.5);
-      text-align: center;
-      padding: 40px;
-      width: 320px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .login-form h2 {
-      margin-top: 0;
-      color: #333;
-    }
-
-    .login-form input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      box-sizing: border-box;
-      background-repeat: no-repeat;
-      background-position: 10px center;
-      padding-left: 40px;
-      background-color: #f9f9f9;
-      background-size: 20px;
-    }
-
-    .login-form h2 {
-      margin-top: 0;
-      color: rgb(253, 253, 253);
-    }
-
-    .login-form input[type="text"] {
-      background-image: url("username-icon.png");
-    }
-
-    .login-form input[type="password"] {
-      background-image: url("password-icon.png");
-    }
-
-    .login-form button {
-      width: auto;
-      padding: 12px 24px;
-      background-color: blue;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      /* Add box shadow effect */
-      transition: transform 0.3s ease-in-out;
-      /* Add transition animation */
-    }
-
-    .login-form button:hover {
-      background-color: #003366;
-      transform: scale(1.05);
-      /* Apply scale transformation on hover */
-    }
-
-     .signup-icon{
-      margin-top: 30px;
-      margin-bottom: -30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: black;
-      margin-left: 40px;
-      font-size: 12px;
-    }
-
-    .google-icon i,
-    .twitter-icon i,
-    .facebook-icon i {
-      margin-left: 20px;
-    }
-
-    .google-icon:hover,
-    .twitter-icon:hover,
-    .facebook-icon:hover {
-      color: rgb(210, 210, 210);
-    }
-
-    .error-message {
-      color: red;
-      margin-top: 10px;
-      opacity: 0;
-      animation: fadeIn 0.3s ease-in-out forwards;
-    }
-
-    .error-message.show {
-      opacity: 1;
-      animation: none;
-    }
-
-    .forgot-password {
-      margin-top: 10px;
-      margin-left:-8px;
-      font-family: 'Times New Roman', Times, serif;
-      text-align: right;
-      color: white;
-    }
-
-    .signup-link {
-      margin-top: 8px;
-      margin-right:-3px;
-      text-decoration: underline;
-      font-family: 'Times New Roman', Times, serif;
-      cursor: pointer;
-      color: white;
-      align-self: flex-start;
-    }
-
-    .footer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      width: 100%;
-      margin-top: 20px;
-    }
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <link rel="stylesheet" href="css/loginstyle.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/signup.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </head>
 
 <body>
   <div class="login-form">
-    <!-- <img src="" alt="Login Animation" width="125" height="125"> -->
     <h2>Login</h2>
-    <input type="text" id="username" placeholder="Username" autocomplete="off">
-    <p id="username-error" class="error-message"></p>
-    <input type="password" id="password" placeholder="Password" autocomplete="off">
-    <p id="password-error" class="error-message"></p>
-    <button onclick="validateLogin()">Login</button>
+    <button class="btn btn-outline-dark ms-3" type="button">Admin</button>
+    <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      type="button">User</button>
+
     <div class="footer">
-      <a href="#" class="forgot-password" onclick="showForgotPasswordPrompt()">Forgot Password?</a>
-      <div class="signup-link" onclick="showSignupPrompt()">Sign Up</div>
+      <div class="signup-link" data-bs-toggle="modal" data-bs-target="#exampleModal1">Sign Up</div>
       <div class="signup-icon">
-      <div class="google-icon">
-        <i class="fab fa-google"></i> Google
-      </div>
-      <div class="google-icon">
-        <i class="fab fa-twitter"></i> Twitter
-      </div>
-      <div class="google-icon">
-        <i class="fab fa-facebook"></i> Facebook
+        <div class="google-icon">
+          <i class="fab fa-google"></i> Google
+        </div>
+        <div class="google-icon">
+          <i class="fab fa-twitter"></i> Twitter
+        </div>
+        <div class="google-icon">
+          <i class="fab fa-facebook"></i> Facebook
+        </div>
       </div>
     </div>
+  </div>
+  <!-- LOGIN -->
+  <!-- <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          type="button">LOGIN</button> -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="text-center modal-title" id="exampleModalLabel">LOG IN</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- EMAIL ID -->
+          <br>
+          <label for="email1" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email1">
+          <small id="emailError1" class="text-danger"></small>
+          <!-- PASSWORD -->
+          <br>
+          <label for="password1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password1">
+          <small id="passwordError1" class="text-danger"></small>
+          <!-- Remember Password Checkbox -->
+          <br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberPassword">
+            <label class="form-check-label" for="rememberPassword">
+              Remember Password
+            </label>
+          </div>
+          <br>
+          <p>Haven't Registered a Account? <a href="" id="login" data-bs-target="#exampleModal1" data-bs-toggle="modal"
+              data-bs-dismiss="modal" onclick="Signup_Form()">Register Now</a> </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" onclick="validate_login()" id="myModalButton"
+            class="btn btn-outline-dark">LogIn</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script>
-    function validateLogin() {
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
 
-      var usernameRegex = /^[a-zA-Z0-9]{4,12}$/; // Regex to validate username: 4-12 characters, alphanumeric
-      var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,12}$/; // Regex to validate password: at least 6 characters, one uppercase, one lowercase, one digit
-
-      var isUsernameValid = usernameRegex.test(username);
-      var isPasswordValid = passwordRegex.test(password);
-
-      showErrorMessage('username-error', !isUsernameValid, "Invalid username.");
-      showErrorMessage('password-error', !isPasswordValid, "Invalid password.");
-
-      if (isUsernameValid && isPasswordValid) {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1500,
-          timerProgressBar: true,
-          onOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          }
-        });
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Login Successful!'
-        }).then((result) => {
-          if (result.dismiss === Swal.DismissReason.timer) {
-            window.location.href = "welcome.html"; // Redirect to welcome page
-          }
-        });
-      }
-    }
-
-    function showErrorMessage(elementId, condition, message) {
-      var element = document.getElementById(elementId);
-
-      if (condition) {
-        element.textContent = message;
-        element.classList.add('show');
-        anime({
-          targets: element,
-          translateY: ['-10px', '0px'],
-          opacity: [0, 1],
-          easing: 'easeOutQuad',
-          duration: 300
-        });
-      } else {
-        element.classList.remove('show');
-      }
-    }
-
-    function showForgotPasswordPrompt() {
-      Swal.fire({
-        title: 'Forgot Password',
-        html: 'Please enter your email:',
-        input: 'email',
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        cancelButtonText: 'Cancel',
-        showLoaderOnConfirm: true,
-        preConfirm: (email) => {
-          // Here you can handle the forgot password logic
-          // For demonstration purposes, we'll just show a success message
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 2000);
-          });
-        },
-        allowOutsideClick: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Password Reset Email Sent!',
-            text: 'Please check your email for further instructions.'
-          });
-        }
-      });
-    }
-
-    function showSignupPrompt() {
-      Swal.fire({
-        title: 'Sign Up',
-        html: 'Please enter your email and password:<br><br>' +
-          '<input type="email" id="signup-email" class="swal2-input" placeholder="Email" autocomplete="off">' +
-          '<input type="password" id="signup-password" class="swal2-input" placeholder="Password" autocomplete="off">',
-        showCancelButton: true,
-        confirmButtonText: 'Submit',
-        cancelButtonText: 'Cancel',
-        focusConfirm: false,
-        preConfirm: () => {
-          var email = document.getElementById('signup-email').value;
-          var password = document.getElementById('signup-password').value;
-
-          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex to validate email
-          var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,12}$/; // Regex to validate password: at least 6 characters, one uppercase, one lowercase, one digit
-
-          var isEmailValid = emailRegex.test(email);
-          var isPasswordValid = passwordRegex.test(password);
-
-          if (!isEmailValid) {
-            Swal.showValidationMessage('Invalid email.');
-          } else if (!isPasswordValid) {
-            Swal.showValidationMessage('Invalid password.');
-          }
-
-          return {
-            email: email,
-            password: password
-          };
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          var email = result.value.email;
-          var password = result.value.password;
-
-          // Here you can handle the signup logic
-          // For demonstration purposes, we'll just show a success message
-          Swal.fire({
-            icon: 'success',
-            title: 'Sign Up Successful!',
-            text: 'Welcome, ' + email + '!'
-          }).then(() => {
-            window.location.href = "welcome.html";
-          });
-        }
-      });
-    }
-  </script>
+  <!-- SIGN UP BUTTON -->
+  <!-- <button class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+          type="button">SIGNUP</button> -->
+  <!--SIGNUP PAGE CONTENT  Modal -->
+  <div id="signup">
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="text-center modal-title" id="exampleModalLabel">SIGN UP</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- NAME -->
+            <label autocomplete="off" for="name" class="form-label">Name</label>
+            <input type="text" oninput="validate_name()" class="form-control" id="name">
+            <small id="nameError" class="text-danger"></small>
+            <!-- EMAIL ID -->
+            <br>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" oninput="validate_email()" class="form-control" id="email">
+            <small id="emailError" class="text-danger"></small>
+            <!-- PASSWORD -->
+            <br>
+            <label for="password" class="form-label">Password</label>
+            <input type="password" oninput="validate_password()" class="form-control" id="password">
+            <small id="passwordError" class="text-danger"></small>
+            <!-- confirmpassword -->
+            <br>
+            <label for="confirmpassword" class="form-label">Confirm Password</label>
+            <input type="password" oninput="validate_confirmpassword();" class="form-control" id="confirmpassword">
+            <small id="confirmpasswordError" class="text-danger"></small>
+            <br>
+            <p>Already have an Account? <a href="" id="login" data-bs-target="#exampleModal" data-bs-dismiss="modal"
+                data-bs-toggle="modal">LogIn</a> </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancel</button>
+            <a type="button" onclick="validate()" class="btn btn-outline-dark">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </form> -->
 </body>
 
 </html>
