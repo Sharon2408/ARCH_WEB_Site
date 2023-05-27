@@ -74,8 +74,8 @@ function validate_confirmpassword() {
   } else document.getElementById("confirmpasswordError").innerHTML = "";
 }
 
-// SignUp informations json
-function Signup(event) {
+// SignUp informations to store in json 
+function Signup() {
   const user_name = document.getElementById("name").value;
   const user_email = document.getElementById("email").value;
   const user_password = document.getElementById("password").value;
@@ -106,7 +106,7 @@ function Signup(event) {
 }
 
 
-
+// To load the cards and display in the main page
 function load_cards() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/Cards");
@@ -143,7 +143,7 @@ function load_cards() {
 };
 load_cards();
 
-// BUY NOW
+// To add the Cards to the Cart json object
 
 function Add_to_Cart(id) {
   const Cart = [];
@@ -181,7 +181,7 @@ function Add_to_Cart(id) {
   }
 
 }
-
+// To display the cards in the cart (buynow.html) 
 function Buy_Now() {
   var Cart = [];
   const xhttp = new XMLHttpRequest();
@@ -192,9 +192,11 @@ function Buy_Now() {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
+      // variable declaration for total quantity and total Amount
       var totalQuantity = 0;
       var totalAmount = 0;
       card += '<h1 class="container-fluid">My Cart<br><a href="favourites.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Favourites</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>'
+      // To fetch the cards from the Json Cart
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
@@ -218,6 +220,7 @@ function Buy_Now() {
         totalQuantity += 1;
         totalAmount += parseFloat(object["Price"])*1000;
       }
+      // To display the image if the cart is empty
       if (card == '') {
         card += '<div class="container">'
         card += '<div class="row" id="hidefavourite">'
@@ -229,6 +232,7 @@ function Buy_Now() {
         card += ' </div>'
         card += ' </div> '
       }
+      // To display totalAmount and Quantity 
       var totalCard = '';
        totalCard = '<div class="total-summary">' +
       '<p class="total-quantity">Total Quantity: <span id="totalQuantity">' + totalQuantity + '</span></p>' +
@@ -243,6 +247,7 @@ function Buy_Now() {
 };
 Buy_Now();
 
+// To remove items from the cart
 function remove_from_Cart(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
@@ -262,6 +267,7 @@ function remove_from_Cart(id) {
   load_cards();
 }
 
+// To create cards to Display only for admin login
 create_cards = () => {
   const price = document.getElementById('price').value;
   const desc = document.getElementById('desc').value;
@@ -287,7 +293,7 @@ create_cards = () => {
 }
 
 
-
+// To add the cards to  Favourite json object
 function addto_favourites(id) {
   const Favourites = [];
   const xhttp = new XMLHttpRequest();
@@ -324,6 +330,7 @@ function addto_favourites(id) {
   }
 }
 
+// To display the Cards in the favourites page (favourites.html)
 favourite_cards = () => {
   var Favourites = [];
   const xhttp = new XMLHttpRequest();
@@ -425,7 +432,7 @@ function validate_login() {
       for (let object of objects) {
         if (
           object["email"] == emailInput_login &&
-          object["password"] == passwordInput_login
+          object["password"] == passwordInput_login && object["Logged"] == 0
         ) {
           
           const updateRequest = new XMLHttpRequest();
@@ -454,9 +461,9 @@ function validate_login() {
                 if (object['Logged'] = 1) {
                   console.log(object['Logged'])
                   const targetUrl = "http://127.0.0.1:5500/Assets/index.html";
-                  window.open(targetUrl, "_blank");
+                  window.open(targetUrl);
                   
-                  break;
+                
                 }
               
               }
@@ -466,9 +473,9 @@ function validate_login() {
           
         }
         else if( object["email"] !== emailInput_login &&
-        object["password"] !== passwordInput_login)
+        object["password"] !== passwordInput_login && object["Logged"]==1)
         {
-window. alert("Username or Password is Incorrect")
+window. alert("Please Logout First")
         }
       }
     }
@@ -508,4 +515,60 @@ alert("Unauthorized Access")
      
     }
   }
+}
+
+logout = () =>{
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/Signup/`);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      const objects = JSON.parse(this.responseText);
+   
+      var logbutton = '';
+      let loggedStatusFound = false;
+      for (let object of objects) {
+        if(object['Logged'] == 1){
+          const updateRequest = new XMLHttpRequest();
+          updateRequest.open("PUT", `http://localhost:3000/Signup/${object['id']}`);
+          updateRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          updateRequest.send(
+            JSON.stringify({
+
+              name: object['name'],
+              email: object['email'],
+              password: object['password'],
+              confirm_password: object['confirm_password'],
+              Logged: 0,
+            })
+          );
+        
+        }
+        
+        if(object['Logged'] == 0 && !loggedStatusFound){
+          loggedStatusFound = true;
+          logbutton += `<button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          type="button">LOGIN</button>`
+          logbutton += `<button class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+          type="button">SIGNUP</button>`
+          $('#log').html(logbutton)
+          
+        }
+        
+         
+      
+    }
+    }
+  }
+}
+
+
+ordernow = () =>{
+  CuteAlert({
+    type: "success",
+    title: "Success!",
+    message: "Operation completed successfully.",
+  });
+  
 }
