@@ -5,21 +5,17 @@ function validate() {
   const passwordInput = document.getElementById("password").value;
   const confirmpasswordInput = document.getElementById("confirmpassword").value;
   if (!nameInput || !emailInput || !passwordInput || !confirmpasswordInput) {
-    document.getElementById("nameError").innerHTML =
-      "Name cannot be empty";
+    document.getElementById("nameError").innerHTML = "Name cannot be empty";
     document.getElementById("emailError").innerHTML =
       "Email-ID cannot be empty";
     document.getElementById("passwordError").innerHTML =
       "Password cannot be empty";
     document.getElementById("confirmpasswordError").innerHTML =
       "Confirm Password cannot be empty";
-  }
-  else if (passwordInput != confirmpasswordInput) {
-    document.getElementById("confirmpasswordError").innerHTML = "Password should match Confirm Password";
-  }
-  else
-    Signup();
-
+  } else if (passwordInput != confirmpasswordInput) {
+    document.getElementById("confirmpasswordError").innerHTML =
+      "Password should match Confirm Password";
+  } else Signup();
 }
 
 // Name Validation
@@ -74,7 +70,7 @@ function validate_confirmpassword() {
   } else document.getElementById("confirmpasswordError").innerHTML = "";
 }
 
-// SignUp informations to store in json 
+// SignUp informations to store in json
 function Signup() {
   const user_name = document.getElementById("name").value;
   const user_email = document.getElementById("email").value;
@@ -105,7 +101,6 @@ function Signup() {
   };
 }
 
-
 // To load the cards and display in the main page
 function load_cards() {
   const xhttp = new XMLHttpRequest();
@@ -127,8 +122,14 @@ function load_cards() {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text">' + object["Description"] + "</p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="Add_to_Cart(' + object["id"] + ');" >Add to Cart</a>' + '&nbsp&nbsp';
-        card += '<a href="#" class="btn btn-primary glowing-button darkButton smallButton mt-3" onclick="addto_favourites(' + object["id"] + ');">Add toFavorite +</a>'
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="Add_to_Cart(' +
+          object["id"] +
+          ');" >Add to Cart</a>' +
+          "&nbsp&nbsp";
+        card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton mt-3" onclick="addto_favourites(' +
+          object["id"] +
+          ');">Add toFavorite +</a>';
         card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot "></i>' +
           object["Location"] +
@@ -140,7 +141,7 @@ function load_cards() {
       $("#dynamic_card").html(card);
     }
   };
-};
+}
 load_cards();
 
 // To add the Cards to the Cart json object
@@ -161,27 +162,20 @@ function Add_to_Cart(id) {
 
       xhttpAdd.open("POST", "http://localhost:3000/Cart");
       xhttpAdd.setRequestHeader("Content-Type", "application/json");
-      console.log("hello123")
+      console.log("hello123");
       xhttpAdd.onload = function () {
-
-
         if (xhttpAdd.status == 200 && xhttpAdd.readystate == 4) {
-          console.log("hello");
-          console.log("hello555")
           const response = JSON.parse(xhttpAdd.responseText);
           Cart.push(itemDetails);
+          alert("Item added to Cart")
           load_cards();
-
         }
       };
       xhttpAdd.send(JSON.stringify(itemDetails));
-
-
     }
-  }
-
+  };
 }
-// To display the cards in the cart (buynow.html) 
+// To display the cards in the cart (buynow.html)
 function Buy_Now() {
   var Cart = [];
   const xhttp = new XMLHttpRequest();
@@ -195,12 +189,13 @@ function Buy_Now() {
       // variable declaration for total quantity and total Amount
       var totalQuantity = 0;
       var totalAmount = 0;
-      card += '<h1 class="container-fluid">My Cart<br><a href="favourites.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Favourites</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>'
+      card +=
+        '<h1 class="container-fluid">My Cart<br><a href="favourites.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Favourites</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>';
       // To fetch the cards from the Json Cart
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
-        card += 
+        card +=
           '<img src="' +
           object["Photo"] +
           '" class="card-img-top" alt="Architecture 1">';
@@ -208,8 +203,12 @@ function Buy_Now() {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text"><b>' + object["Description"] + "</b></p>";
         card +=
-          '<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Favourites+</a>' + '&nbsp&nbsp';
-        card += '<a href="#" class="btn btn-warning glowing-button darkButton smallButton"   onclick="remove_from_Cart(' + object["id"] + ');">Remove</a>'
+          '<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Favourites+</a>' +
+          "&nbsp&nbsp";
+        card +=
+          '<a href="#" class="btn btn-warning glowing-button darkButton smallButton"   onclick="remove_from_Cart(' +
+          object["id"] +
+          ');">Remove</a>';
         card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>' +
           object["Location"] +
@@ -218,33 +217,42 @@ function Buy_Now() {
         card += "</div>";
         card += "</div>";
         totalQuantity += 1;
-        totalAmount += parseFloat(object["Price"])*1000;
+        totalAmount += parseFloat(object["Price"]) * 1000;
       }
       // To display the image if the cart is empty
-      if (card == '') {
-        card += '<div class="container">'
-        card += '<div class="row" id="hidefavourite">'
-        card += '   <div class="col">'
-        card += ' <h1>My Cart</h1>'
-        card += ' <p class="empty-message">You havent added anything to your Cart.</p>'
-        card += '  <a href="index.html#cards" class="btn btn-primary glowing-button">Buy Now</a>'
-        card += ' </div>'
-        card += ' </div>'
-        card += ' </div> '
+      if (card == "") {
+        card += '<div class="container">';
+        card += '<div class="row" id="hidefavourite">';
+        card += '   <div class="col">';
+        card += " <h1>My Cart</h1>";
+        card +=
+          ' <p class="empty-message">You havent added anything to your Cart.</p>';
+        card +=
+          '  <a href="index.html#cards" class="btn btn-primary glowing-button">Buy Now</a>';
+        card += " </div>";
+        card += " </div>";
+        card += " </div> ";
+        document.getElementById("disable").disabled = true;
       }
-      // To display totalAmount and Quantity 
-      var totalCard = '';
-       totalCard = '<div class="total-summary">' +
-      '<p class="total-quantity">Total Quantity: <span id="totalQuantity">' + totalQuantity + '</span></p>' +
-      '<p class="total-amount">Total Amount:  ₹ <span id="totalQuantity">' + totalAmount.toFixed(2) + '</span></p>' +
-      '<button type="button" class="glowing-button btn btn-primary">Order Now</button>'+
-      '</div>';
-      console.log(totalQuantity,totalAmount)
+
+      // To display totalAmount and Quantity
+      var totalCard = "";
+      totalCard =
+        '<div class="total-summary">' +
+        '<p class="total-quantity">Total Quantity: <span id="totalQuantity">' +
+        totalQuantity +
+        "</span></p>" +
+        '<p class="total-amount">Total Amount:  ₹ <span id="totalQuantity">' +
+        totalAmount.toFixed(2) +
+        "</span></p>" +
+        '<a type="button" id="disable" onclick="ordernow()" class="glowing-button btn btn-primary" style="color:white;">Get Quote</a>' +
+        "</div>";
+      console.log(totalQuantity, totalAmount);
       $("#Buycards").html(card);
       $("#total").html(totalCard);
     }
   };
-};
+}
 Buy_Now();
 
 // To remove items from the cart
@@ -253,26 +261,22 @@ function remove_from_Cart(id) {
   const xhttp = new XMLHttpRequest();
   xhttp.open(`DELETE`, `http://localhost:3000/Cart/${id}`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(
-    JSON.stringify({ id: id }));
+  xhttp.send(JSON.stringify({ id: id }));
   xhttp.onreadystatechange = () => {
     console.log(id);
     if (xhttp.readyState == 4) {
       const objects = JSON.parse(xhttp.responseText);
-
-
     }
-
   };
   load_cards();
 }
 
 // To create cards to Display only for admin login
 create_cards = () => {
-  const price = document.getElementById('price').value;
-  const desc = document.getElementById('desc').value;
-  const location = document.getElementById('location').value;
-  const input = document.getElementById('photo');
+  const price = document.getElementById("price").value;
+  const desc = document.getElementById("desc").value;
+  const location = document.getElementById("location").value;
+  const input = document.getElementById("photo");
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "http://localhost:3000/Cards/");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -290,8 +294,7 @@ create_cards = () => {
       load_cards();
     }
   };
-}
-
+};
 
 // To add the cards to  Favourite json object
 function addto_favourites(id) {
@@ -310,24 +313,19 @@ function addto_favourites(id) {
 
       xhttpAdd.open("POST", "http://localhost:3000/Favourites");
       xhttpAdd.setRequestHeader("Content-Type", "application/json");
-      console.log("hello123")
+      console.log("hello123");
       xhttpAdd.onload = function () {
-
-
         if (xhttpAdd.status == 200 && xhttpAdd.readystate == 4) {
-          console.log("hello");
-          console.log("hello555")
+         
           const response = JSON.parse(xhttpAdd.responseText);
           Favourites.push(itemDetails);
           load_cards();
-
+        
         }
       };
       xhttpAdd.send(JSON.stringify(itemDetails));
-
-
     }
-  }
+  };
 }
 
 // To display the Cards in the favourites page (favourites.html)
@@ -341,7 +339,8 @@ favourite_cards = () => {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
-      card += '<h1 class="container-fluid">My Favourites<br><a href="buynow.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Cart</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>'
+      card +=
+        '<h1 class="container-fluid">My Favourites<br><a href="buynow.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Cart</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>';
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
@@ -353,8 +352,14 @@ favourite_cards = () => {
         card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
         card += '<p class="card-text"><b>' + object["Description"] + "</b></p>";
         card +=
-          '<a href="#" class="btn btn-success glowing-button darkButton smallButton ms-3" onclick=Add_to_Cart(' + object["id"] + ') >Add to Cart</a>' + '&nbsp&nbsp';
-        card += '<a href="#" class="btn btn-warning glowing-button darkButton smallButton mt-3" onclick="remove_favourites(' + object["id"] + ');">Remove from Favourites</a>'
+          '<a href="#" class="btn btn-success glowing-button darkButton smallButton ms-3" onclick=Add_to_Cart(' +
+          object["id"] +
+          ") >Add to Cart</a>" +
+          "&nbsp&nbsp";
+        card +=
+          '<a href="#" class="btn btn-warning glowing-button darkButton smallButton mt-3" onclick="remove_favourites(' +
+          object["id"] +
+          ');">Remove from Favourites</a>';
         card +=
           '<address class="card-foot"><br><i class="fa-solid fa-location-dot"></i>' +
           object["Location"] +
@@ -363,16 +368,18 @@ favourite_cards = () => {
         card += "</div>";
         card += "</div>";
       }
-      if (card == '') {
-        card += '<div class="container">'
-        card += '<div class="row" id="hidefavourite">'
-        card += '   <div class="col">'
-        card += ' <h1>My Favorites</h1>'
-        card += ' <p class="empty-message">You havent added anything to favorites yet.</p>'
-        card += '  <a href="index.html#cards" class="btn btn-primary glowing-button">Add Now</a>'
-        card += ' </div>'
-        card += ' </div>'
-        card += ' </div> '
+      if (card == "") {
+        card += '<div class="container">';
+        card += '<div class="row" id="hidefavourite">';
+        card += '   <div class="col">';
+        card += " <h1>My Favorites</h1>";
+        card +=
+          ' <p class="empty-message">You havent added anything to favorites yet.</p>';
+        card +=
+          '  <a href="index.html#cards" class="btn btn-primary glowing-button">Add Now</a>';
+        card += " </div>";
+        card += " </div>";
+        card += " </div> ";
       }
       $("#favoritecards").html(card);
     }
@@ -385,19 +392,15 @@ remove_favourites = (id) => {
   const xhttp = new XMLHttpRequest();
   xhttp.open(`DELETE`, `http://localhost:3000/Favourites/${id}`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(
-    JSON.stringify({ id: id }));
+  xhttp.send(JSON.stringify({ id: id }));
   xhttp.onreadystatechange = () => {
     console.log(id);
     if (xhttp.readyState == 4) {
       const objects = JSON.parse(xhttp.responseText);
-
-
     }
-
   };
   load_cards();
-}
+};
 
 //LOGIN
 function validate_login() {
@@ -410,8 +413,7 @@ function validate_login() {
     document.getElementById("emailError1").innerHTML = "Email cannot be empty";
     document.getElementById("passwordError1").innerHTML =
       "Password cannot be empty";
-  }
-  else if (!emailregex.test(emailInput_login)) {
+  } else if (!emailregex.test(emailInput_login)) {
     document.getElementById("emailError1").innerHTML =
       "Please enter a valid email-id";
   } else if (!passwordregex.test(passwordInput_login)) {
@@ -432,19 +434,24 @@ function validate_login() {
       for (let object of objects) {
         if (
           object["email"] == emailInput_login &&
-          object["password"] == passwordInput_login && object["Logged"] == 0
+          object["password"] == passwordInput_login &&
+          object["Logged"] == 0
         ) {
-          
           const updateRequest = new XMLHttpRequest();
-          updateRequest.open("PUT", `http://localhost:3000/Signup/${object['id']}`);
-          updateRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          updateRequest.open(
+            "PUT",
+            `http://localhost:3000/Signup/${object["id"]}`
+          );
+          updateRequest.setRequestHeader(
+            "Content-Type",
+            "application/json;charset=UTF-8"
+          );
           updateRequest.send(
             JSON.stringify({
-
-              name: object['name'],
-              email: object['email'],
-              password: object['password'],
-              confirm_password: object['confirm_password'],
+              name: object["name"],
+              email: object["email"],
+              password: object["password"],
+              confirm_password: object["confirm_password"],
               Logged: log,
             })
           );
@@ -455,69 +462,64 @@ function validate_login() {
             if (this.readyState == 4 && this.status == 200) {
               console.log(this.responseText);
               const objects = JSON.parse(this.responseText);
-              var card = '';
-             
+              var card = "";
               for (let object of objects) {
-                if (object['Logged'] = 1) {
-                  console.log(object['Logged'])
-                  const targetUrl = "http://127.0.0.1:5500/Assets/index.html";
-                  window.open(targetUrl);
-                  
+                if ((object["Logged"] = 1)) {
+                  console.log(object["Logged"]);
+                  // Redirect to the target page
+                  window.location.href = "index.html";
                 
                 }
-              
               }
             }
           };
           break;
-          
-        }
-        else if( object["email"] !== emailInput_login &&
-        object["password"] !== passwordInput_login && object["Logged"]==1)
-        {
-window. alert("Please Logout First")
+        } else if (
+          object["email"] !== emailInput_login &&
+          object["password"] !== passwordInput_login &&
+          object["Logged"] == 1
+        ) {
+          window.alert("Please Logout First");
         }
       }
     }
-  }
+  };
 }
 
-admin_login = () =>{
- const admin_email = document.getElementById('adminemail').value;
- const admin_password = document.getElementById('adminpassword').value;
- const xhttp = new XMLHttpRequest();
- xhttp.open("GET", `http://localhost:3000/Admin`);
- xhttp.send();
- xhttp.onreadystatechange = function () {
-   if (this.readyState == 4 && this.status == 200) {
-     console.log(this.responseText);
-     const objects = JSON.parse(this.responseText);
-     var hide = '';
-     for (let object of objects) {
-      console.log(admin_email)
-       if (
-         object['admin_email'] == admin_email &&
-         object['admin_password'] == admin_password
-       ){
-        console.log(admin_email)
-       window.open("http://127.0.0.1:5500/Assets/admin.html");
-       hide += `<p>${object['admin_email']}</p>`+`<a class="btn btn-outline-dark ms-2 buttonhide"  type="button"
-       id="signupbutton">Logout</a>`
-       $("#loginitem").html(hide);
-       break;
-       }
-       
-       else{
-alert("Unauthorized Access")
-       }
-       
-     }
-     
+admin_login = () => {
+  const admin_email = document.getElementById("adminemail").value;
+  const admin_password = document.getElementById("adminpassword").value;
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/Admin`);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+      const objects = JSON.parse(this.responseText);
+      var show_user = "";
+      for (let object of objects) {
+        console.log(admin_email);
+        if (
+          object["admin_email"] == admin_email &&
+          object["admin_password"] == admin_password
+        ) {
+          console.log(admin_email);
+          window.open("http://127.0.0.1:5500/Assets/admin.html");
+          show_user +=
+            `<p>${object["admin_email"]}</p>` +
+            `<a class="btn btn-outline-dark ms-2 buttonhide"  type="button"
+       id="signupbutton">Logout</a>`;
+          $("#signupbutton").html(show_user);
+          break;
+        } else {
+          alert("Unauthorized Access");
+        }
+      }
     }
-  }
-}
+  };
+};
 
-logout = () =>{
+logout = () => {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", `http://localhost:3000/Signup/`);
   xhttp.send();
@@ -525,50 +527,49 @@ logout = () =>{
     if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       const objects = JSON.parse(this.responseText);
-   
-      var logbutton = '';
+
+      var logbutton = "";
       let loggedStatusFound = false;
       for (let object of objects) {
-        if(object['Logged'] == 1){
+        if (object["Logged"] == 1) {
           const updateRequest = new XMLHttpRequest();
-          updateRequest.open("PUT", `http://localhost:3000/Signup/${object['id']}`);
-          updateRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          updateRequest.open(
+            "PUT",
+            `http://localhost:3000/Signup/${object["id"]}`
+          );
+          updateRequest.setRequestHeader(
+            "Content-Type",
+            "application/json;charset=UTF-8"
+          );
           updateRequest.send(
             JSON.stringify({
-
-              name: object['name'],
-              email: object['email'],
-              password: object['password'],
-              confirm_password: object['confirm_password'],
+              name: object["name"],
+              email: object["email"],
+              password: object["password"],
+              confirm_password: object["confirm_password"],
               Logged: 0,
             })
           );
-        
         }
-        
-        if(object['Logged'] == 0 && !loggedStatusFound){
+
+        if (object["Logged"] == 0 && !loggedStatusFound) {
           loggedStatusFound = true;
           logbutton += `<button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"
-          type="button">LOGIN</button>`
+          type="button">LOGIN</button>`;
           logbutton += `<button class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-          type="button">SIGNUP</button>`
-          $('#log').html(logbutton)
-          
+          type="button">SIGNUP</button>`;
+          $("#log").html(logbutton);
         }
-        
-         
-      
+      }
     }
-    }
-  }
-}
+  };
+};
 
-
-ordernow = () =>{
-  CuteAlert({
+ordernow = () => {
+  cuteAlert({
     type: "success",
-    title: "Success!",
-    message: "Operation completed successfully.",
+    title: "Right Choice",
+    message: "We'll contact you soon",
+    buttonText: "Feeling Woah!",
   });
-  
-}
+};
