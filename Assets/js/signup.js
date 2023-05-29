@@ -102,9 +102,9 @@ function Signup() {
 }
 
 // To load the cards and display in the main page
-function load_cards() {
+function load_cards(Description = '') {
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/Cards");
+  xhttp.open("GET", `http://localhost:3000/Cards?Description_like=${Description}`);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -143,6 +143,12 @@ function load_cards() {
   };
 }
 load_cards();
+
+// Search implementation
+function search() {
+  const card_name = document.getElementById("search1").value;
+  load_cards(card_name);
+}
 
 // To add the Cards to the Cart json object
 
@@ -239,7 +245,7 @@ function Buy_Now() {
       var totalCard = "";
       totalCard =
         '<div class="total-summary">' +
-        '<p class="total-quantity">Total Quantity: <span id="totalQuantity">' +
+        '<p class="total-quantity">Total Designs: <span id="totalQuantity">' +
         totalQuantity +
         "</span></p>" +
         '<p class="total-amount">Total Amount:  ₹ <span id="totalQuantity">' +
@@ -276,7 +282,6 @@ create_cards = () => {
   const price = document.getElementById("price").value;
   const desc = document.getElementById("desc").value;
   const location = document.getElementById("location").value;
-  const input = document.getElementById("photo");
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "http://localhost:3000/Cards/");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -573,3 +578,50 @@ ordernow = () => {
     buttonText: "Feeling Woah!",
   });
 };
+
+// home_office cards
+function home_office_load_cards() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://localhost:3000/home_office");
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // console.log(this.responseText);
+      var card = "";
+      const objects = JSON.parse(this.responseText);
+      for (let home_office of objects) {
+        card += '<div  class="col-md-4">';
+        card += '<div  class="card mb-4 glowing-border">';
+        card +=
+          '<img src="' +
+      home_office["Photo"] +
+          '" class="card-img-top" alt="Architecture 1">';
+        card += '<div class="card-body">';
+        card += "<h5 class='card-title'>" + home_office["Price"] + "</h5>";
+        card += '<p class="card-text">' + home_office["Description"] + "</p>";
+        card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="Add_to_Cart(' +
+          home_office["id"] +
+          ');" >Add to Cart</a>' +
+          "&nbsp&nbsp";
+        card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton mt-3" onclick="addto_favourites(' +
+          home_office["id"] +
+          ');">Add toFavorite +</a>';
+        card +=
+          '<address class="card-foot"><br><i class="fa-solid fa-location-dot "></i>' +
+          home_office["Location"] +
+          "</address>";
+        card += "</div>";
+        card += "</div>";
+        card += "</div>";
+      }
+      $("#home_office").html(card);
+    }
+  };
+}
+home_office_load_cards();
+
+
+
+

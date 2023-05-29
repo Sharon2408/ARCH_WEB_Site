@@ -12,7 +12,7 @@
       "email": "Sharon@g2techsoft.com",
       "password": "Gmail@123",
       "confirm_password": "Gmail@123",
-      "Logged": 0,
+      "Logged": 1,
       "id": 3
     },
     {
@@ -86,11 +86,11 @@
   ],
   "Cart": [
     {
-      "id": 1,
-      "Photo": "images/hall1.jpg",
-      "Price": "78,000",
-      "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
-      "Location": "Coimbatore"
+      "id": 2,
+      "Photo": "images/hall2.jpg",
+      "Price": "80,000",
+      "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
+      "Location": "Selvapuram"
     }
   ],
   "Admin": [
@@ -98,5 +98,30 @@
       "admin_email": "sha@gmail.com",
       "admin_password": "9486"
     }
-  ]
+  ],
+  "home_office": [
+    {
+      "id": 1,
+      "Photo": "images/hall6.jpg",
+      "Price": "78,000",
+      "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
+      "Location": "Coimbatore"
+    },
+    {
+      "id": 2,
+      "Photo": "images/hall2.jpg",
+      "Price": "80,000",
+      "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
+      "Location": "Selvapuram"
+    },
+    {
+      "id": 3,
+      "Photo": "images/hall3.jpg",
+      "Price": "80,000",
+      "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
+      "Location": "Selvapuram"
+    }
+  ],
+  "hall_interior": [],
+  "space_saving": []
 }

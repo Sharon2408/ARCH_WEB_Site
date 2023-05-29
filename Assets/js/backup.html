@@ -196,7 +196,18 @@
     <input type="text" name="username" placeholder="Username">
     <button type="submit">Submit</button>
   </form>
-
+  <div id="price-range">
+    <div id="progress-bar"></div>
+  </div>
+  
+  <ul id="item-list">
+    <li data-price="10">Item 1 ($10)</li>
+    <li data-price="20">Item 2 ($20)</li>
+    <li data-price="30">Item 3 ($30)</li>
+    <li data-price="40">Item 4 ($40)</li>
+    <li data-price="50">Item 5 ($50)</li>
+  </ul>
+  
   <script>
     document.getElementById("myForm").addEventListener("submit", function(event) {
       event.preventDefault(); // Prevent the default form submission
