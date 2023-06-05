@@ -321,11 +321,11 @@ function addto_favourites(id) {
       console.log("hello123");
       xhttpAdd.onload = function () {
         if (xhttpAdd.status == 200 && xhttpAdd.readystate == 4) {
-         
+
           const response = JSON.parse(xhttpAdd.responseText);
           Favourites.push(itemDetails);
           load_cards();
-        
+
         }
       };
       xhttpAdd.send(JSON.stringify(itemDetails));
@@ -473,7 +473,7 @@ function validate_login() {
                   console.log(object["Logged"]);
                   // Redirect to the target page
                   window.location.href = "index.html";
-                
+
                 }
               }
             }
@@ -594,7 +594,7 @@ function home_office_load_cards() {
         card += '<div  class="card mb-4 glowing-border">';
         card +=
           '<img src="' +
-      home_office["Photo"] +
+          home_office["Photo"] +
           '" class="card-img-top" alt="Architecture 1">';
         card += '<div class="card-body">';
         card += "<h5 class='card-title'>" + home_office["Price"] + "</h5>";
@@ -623,5 +623,125 @@ function home_office_load_cards() {
 home_office_load_cards();
 
 
+function admin_load_cards() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/Cards`);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // console.log(this.responseText);
+      var card = "";
+      const objects = JSON.parse(this.responseText);
+      for (let object of objects) {
+        card += '<div  class="col-md-4">';
+        card += '<div  class="card mb-4 glowing-border">';
+        card +=
+          '<img src="' +
+          object["Photo"] +
+          '" class="card-img-top" alt="Architecture 1">';
+        card += '<div class="card-body">';
+        card += "<h5 class='card-title'>" + object["Price"] + "</h5>";
+        card += '<p class="card-text">' + object["Description"] + "</p>";
+        card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="admin_edit_show(' +
+          object["id"] +
+          ');" >Edit</a>' +
+          "&nbsp&nbsp";
+        card +=
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton " onclick="admin_delete(' +
+          object["id"] +
+          ');">Delete+</a>';
+        card +=
+          '<address class="card-foot"><br><i class="fa-solid fa-location-dot "></i>' +
+          object["Location"] +
+          "</address>";
+        card += "</div>";
+        card += "</div>";
+        card += "</div>";
+      }
+      $("#admin_card").html(card);
+    }
+  };
+}
 
+admin_load_cards();
 
+function admin_delete(id) {
+  console.log(id);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(`DELETE`, `http://localhost:3000/Cards/${id}`);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(JSON.stringify({ id: id }));
+  xhttp.onreadystatechange = () => {
+    console.log(id);
+    if (xhttp.readyState == 4) {
+      const objects = JSON.parse(xhttp.responseText);
+    }
+  };
+  admin_load_cards();
+}
+// Admin Edit show
+function admin_edit_show(id) {
+  console.log(id);
+  const edit_req = new XMLHttpRequest();
+  edit_req.open("GET", `http://localhost:3000/Cards/${id}`)
+  edit_req.send();
+  edit_req.onreadystatechange = function () {
+if (this.readyState == 4 && this.status == 200) {
+      const objects = JSON.parse(this.responseText);
+      console.log(objects);
+      Swal.fire({
+        title: "Edit Cards",
+        html:
+         '<input id="id" type="hidden" value="' +
+           objects[`${id}`] +
+           '">' +
+          '<input id="Price" class="swal2-input" placeholder="Price" value="' +
+          objects.Price +
+          '">' +
+          '<input id="Description" class="swal2-input" placeholder="Description" value="' +
+          objects.Description +
+          '">' +
+          '<input id="Location" class="swal2-input" placeholder="Location" value="' +
+          objects.Location+
+          '">' +
+          '<input id="Photo" type="file" class="swal2-input" placeholder="Photo" value="' +
+          objects.Photo +
+          '">',
+         preConfirm: () => {
+           admin_edit(id);
+        },
+      });
+    }
+    else{
+      console.log("hello");
+    }
+
+  }
+}
+
+function admin_edit(id){
+const edit_price = document.getElementById('Price').value;
+const edit_description = document.getElementById('Description').value;
+const edit_location = document.getElementById('Location').value;
+const edit_photo = document.getElementById('Photo').value;
+// const file = "images" +  edit_photo.files[0].name
+const xhttp = new XMLHttpRequest();
+    xhttp.open("PUT", `http://localhost:3000/Cards/${id}`);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(
+      JSON.stringify({
+       // id: id,
+        Price : edit_price,
+        Description : edit_description,
+        Location : edit_location,
+        Photo : file,
+      })
+    );
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const objects = JSON.parse(this.responseText);
+        admin_load_cards();
+      }
+    };
+}
