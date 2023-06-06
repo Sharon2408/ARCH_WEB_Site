@@ -12,7 +12,7 @@
       "email": "Sharon@g2techsoft.com",
       "password": "Gmail@123",
       "confirm_password": "Gmail@123",
-      "Logged": 1,
+      "Logged": 0,
       "id": 3
     },
     {
@@ -26,38 +26,22 @@
   ],
   "Cards": [
     {
-      "Price": "8,000",
-      "Description": "Scandinavian Minimalism:",
-      "Location": "Cbe",
-      "Photo": "",
+      "Price": "4567555",
+      "Description": "Abs",
+      "Location": "Kolkata",
+      "Photo": "images/hall5.jpg",
       "id": 1
-    }
-  ],
-  "Favourites": [
-    {
-      "id": 1,
-      "Photo": "images/hall1.jpg",
-      "Price": "78,000",
-      "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
-      "Location": "Coimbatore"
     },
     {
-      "id": 4,
-      "Photo": "images/hal4l.jpg",
-      "Price": "78,000",
-      "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
-      "Location": "Coimbatore"
+      "Price": "20,00,000",
+      "Description": "3BHK",
+      "Location": "Selvapuram",
+      "Photo": "/Assets/images/house2.jpeg",
+      "id": 2
     }
   ],
-  "Cart": [
-    {
-      "id": 2,
-      "Photo": "images/hall2.jpg",
-      "Price": "80,000",
-      "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
-      "Location": "Selvapuram"
-    }
-  ],
+  "Favourites": [],
+  "Cart": [],
   "Admin": [
     {
       "admin_email": "sha@gmail.com",
@@ -88,5 +72,13 @@
     }
   ],
   "hall_interior": [],
-  "space_saving": []
+  "space_saving": [],
+  "Get_Quote": [
+    {
+      "Name": "Sharon D",
+      "Email": "sharonantony2408@gmail.com",
+      "Phone": "9597303632",
+      "id": 1
+    }
+  ]
 }

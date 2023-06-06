@@ -94,9 +94,6 @@ function Signup() {
       var alertHTML = "";
       const objects = JSON.parse(this.responseText);
       console.log(objects);
-      alertHTML +=
-        '<span class="alert alert-success" role="alert"> This is a success alert—check it out! </span>';
-      document.getElementById("alert").innerHTML = alertHTML;
     }
   };
 }
@@ -196,7 +193,7 @@ function Buy_Now() {
       var totalQuantity = 0;
       var totalAmount = 0;
       card +=
-        '<h1 class="container-fluid">My Cart<br><a href="favourites.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Favourites</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>';
+        '<h1 class="container-fluid">My Cart<br><a href="favourites.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Favourites</a>&nbsp<a href="user.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>';
       // To fetch the cards from the Json Cart
       for (let object of objects) {
         card += '<div  class="col-md-4">';
@@ -344,8 +341,9 @@ favourite_cards = () => {
       // console.log(this.responseText);
       var card = "";
       const objects = JSON.parse(this.responseText);
+      card += '<a  onclick="logout()" class="btn btn-outline-dark ms-2 buttonhide"type="button" id="signupbutton">Logout</a>'
       card +=
-        '<h1 class="container-fluid">My Favourites<br><a href="buynow.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Cart</a>&nbsp<a href="index.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>';
+        '<h1 class="container-fluid">My Favourites<br><a href="buynow.html" class="btn btn-success glowing-button darkButton smallButton" >Go to Cart</a>&nbsp<a href="user.html" class="btn btn-success glowing-button darkButton smallButton" >Back to Shopping</a></h1>';
       for (let object of objects) {
         card += '<div  class="col-md-4">';
         card += '<div  class="card mb-4 glowing-border">';
@@ -472,7 +470,7 @@ function validate_login() {
                 if ((object["Logged"] = 1)) {
                   console.log(object["Logged"]);
                   // Redirect to the target page
-                  window.location.href = "index.html";
+                  window.location.href = "user.html";
 
                 }
               }
@@ -565,6 +563,7 @@ logout = () => {
           type="button">SIGNUP</button>`;
           $("#log").html(logbutton);
         }
+
       }
     }
   };
@@ -579,6 +578,10 @@ ordernow = () => {
   });
 };
 
+
+
+
+
 // home_office cards
 function home_office_load_cards() {
   const xhttp = new XMLHttpRequest();
@@ -591,11 +594,11 @@ function home_office_load_cards() {
       const objects = JSON.parse(this.responseText);
       for (let home_office of objects) {
         card += '<div  class="col-md-4">';
-        card += '<div  class="card mb-4 glowing-border">';
+        card += '<div  class="card mb-4 ">';
         card +=
           '<img src="' +
           home_office["Photo"] +
-          '" class="card-img-top" alt="Architecture 1">';
+          '" class="card-img-top"  alt="Architecture 1">';
         card += '<div class="card-body">';
         card += "<h5 class='card-title'>" + home_office["Price"] + "</h5>";
         card += '<p class="card-text">' + home_office["Description"] + "</p>";
@@ -623,6 +626,9 @@ function home_office_load_cards() {
 home_office_load_cards();
 
 
+
+
+// Admin Page Cards
 function admin_load_cards() {
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", `http://localhost:3000/Cards`);
@@ -663,9 +669,12 @@ function admin_load_cards() {
     }
   };
 }
-
 admin_load_cards();
 
+
+
+
+// Admin page delete cards
 function admin_delete(id) {
   console.log(id);
   const xhttp = new XMLHttpRequest();
@@ -680,22 +689,25 @@ function admin_delete(id) {
   };
   admin_load_cards();
 }
-// Admin Edit show
+
+
+
+// Admin Edit Option Modal
 function admin_edit_show(id) {
   console.log(id);
   const edit_req = new XMLHttpRequest();
   edit_req.open("GET", `http://localhost:3000/Cards/${id}`)
   edit_req.send();
   edit_req.onreadystatechange = function () {
-if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && this.status == 200) {
       const objects = JSON.parse(this.responseText);
       console.log(objects);
       Swal.fire({
         title: "Edit Cards",
         html:
-         '<input id="id" type="hidden" value="' +
-           objects[`${id}`] +
-           '">' +
+          '<input id="id" type="hidden" value="' +
+          objects[`${id}`] +
+          '">' +
           '<input id="Price" class="swal2-input" placeholder="Price" value="' +
           objects.Price +
           '">' +
@@ -703,45 +715,72 @@ if (this.readyState == 4 && this.status == 200) {
           objects.Description +
           '">' +
           '<input id="Location" class="swal2-input" placeholder="Location" value="' +
-          objects.Location+
+          objects.Location +
           '">' +
           '<input id="Photo" type="file" class="swal2-input" placeholder="Photo" value="' +
           objects.Photo +
           '">',
-         preConfirm: () => {
-           admin_edit(id);
+        preConfirm: () => {
+          admin_edit(id);
         },
       });
     }
-    else{
+    else {
       console.log("hello");
     }
 
   }
 }
 
-function admin_edit(id){
-const edit_price = document.getElementById('Price').value;
-const edit_description = document.getElementById('Description').value;
-const edit_location = document.getElementById('Location').value;
-const edit_photo = document.getElementById('Photo').value;
-// const file = "images" +  edit_photo.files[0].name
-const xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", `http://localhost:3000/Cards/${id}`);
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(
-      JSON.stringify({
-       // id: id,
-        Price : edit_price,
-        Description : edit_description,
-        Location : edit_location,
-        Photo : file,
-      })
-    );
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        const objects = JSON.parse(this.responseText);
-        admin_load_cards();
-      }
-    };
+
+// Admin Edit Function
+function admin_edit(id) {
+  const edit_price = document.getElementById('Price').value;
+  const edit_description = document.getElementById('Description').value;
+  const edit_location = document.getElementById('Location').value;
+  const edit_photo = document.getElementById('Photo').value;
+  //  const file = "./images/" +  edit_photo.files[0].name;
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("PUT", `http://localhost:3000/Cards/${id}`);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(
+    JSON.stringify({
+      // id: id,
+      Price: edit_price,
+      Description: edit_description,
+      Location: edit_location,
+      Photo: "images/hall5.jpg",
+    })
+  );
+  // If the change is Done in the server
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const objects = JSON.parse(this.responseText);
+      admin_load_cards();
+    }
+  };
+}
+
+
+function get_quote(){
+  var name_quote = document.getElementById('name_quote').value;
+  var email_quote = document.getElementById('email_quote').value;
+  var phone_quote = document.getElementById('phone_quote').value;
+
+  const xhttpreq = new XMLHttpRequest();
+  xhttpreq.open("POST", "http://localhost:3000/Get_Quote");
+  xhttpreq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttpreq.send(
+    JSON.stringify({
+      Name:name_quote,
+      Email:email_quote,
+      Phone:phone_quote,
+    })
+  );
+  xhttpreq.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const objects = JSON.parse(this.responseText);
+      console.log(objects);
+    }
+  };
 }
