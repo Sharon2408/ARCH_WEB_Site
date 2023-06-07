@@ -26,18 +26,25 @@
   ],
   "Cards": [
     {
-      "Price": "4567555",
-      "Description": "Abs",
-      "Location": "Kolkata",
-      "Photo": "images/hall5.jpg",
+      "Price": "20,000",
+      "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
+      "Location": "New York",
+      "Photo": "/Assets/images/house2.jpeg",
       "id": 1
     },
     {
-      "Price": "20,00,000",
-      "Description": "3BHK",
-      "Location": "Selvapuram",
+      "Price": "45,000",
+      "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
+      "Location": "United Kingdom",
       "Photo": "/Assets/images/house2.jpeg",
       "id": 2
+    },
+    {
+      "Price": "90,000",
+      "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
+      "Location": "Coimbatore",
+      "Photo": "/Assets/images/house2.jpeg",
+      "id": 3
     }
   ],
   "Favourites": [],
@@ -50,21 +57,21 @@
   ],
   "home_office": [
     {
-      "id": 1,
+      "id": 5,
       "Photo": "images/hall6.jpg",
       "Price": "78,000",
       "Description": "Scandinavian Minimalism: Discover the beauty of simplicity with clean lines, neutral colors, and functional furniture that define the essence of Scandinavian interior design.",
       "Location": "Coimbatore"
     },
     {
-      "id": 2,
+      "id": 6,
       "Photo": "images/hall2.jpg",
       "Price": "80,000",
       "Description": "Bohemian Retreat: Immerse yourself in a world of vibrant colors, rich textures, and a free-spirited ambiance that characterizes the bohemian style, creating a cozy and eclectic haven.",
       "Location": "Selvapuram"
     },
     {
-      "id": 3,
+      "id": 7,
       "Photo": "images/hall3.jpg",
       "Price": "80,000",
       "Description": "Industrial Chic: Experience the raw and edgy charm of industrial design, blending exposed brick, metal accents, and salvaged materials to create a modern and urban aesthetic.",
@@ -79,6 +86,12 @@
       "Email": "sharonantony2408@gmail.com",
       "Phone": "9597303632",
       "id": 1
+    },
+    {
+      "Name": "",
+      "Email": "",
+      "Phone": "",
+      "id": 2
     }
   ]
 }

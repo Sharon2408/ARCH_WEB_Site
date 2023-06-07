@@ -178,6 +178,37 @@ function Add_to_Cart(id) {
     }
   };
 }
+
+// Add to cart for Home_office
+function Add_to_Cart_home_office(id) {
+  const Cart = [];
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/home_office/${id}`);
+  xhttp.send();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      console.log(id);
+      const itemDetails = JSON.parse(this.responseText);
+      console.log(itemDetails);
+
+      const xhttpAdd = new XMLHttpRequest();
+
+      xhttpAdd.open("POST", "http://localhost:3000/Cart");
+      xhttpAdd.setRequestHeader("Content-Type", "application/json");
+      console.log("hello123");
+      xhttpAdd.onload = function () {
+        if (xhttpAdd.status == 200 && xhttpAdd.readystate == 4) {
+          const response = JSON.parse(xhttpAdd.responseText);
+          Cart.push(itemDetails);
+          alert("Item added to Cart")
+          load_cards();
+        }
+      };
+      xhttpAdd.send(JSON.stringify(itemDetails));
+    }
+  };
+}
 // To display the cards in the cart (buynow.html)
 function Buy_Now() {
   var Cart = [];
@@ -248,7 +279,7 @@ function Buy_Now() {
         '<p class="total-amount">Total Amount:  ₹ <span id="totalQuantity">' +
         totalAmount.toFixed(2) +
         "</span></p>" +
-        '<a type="button" id="disable" onclick="ordernow()" class="glowing-button btn btn-primary" style="color:white;">Get Quote</a>' +
+        '<a type="button" id="disable" onclick="ordernow()" class="glowing-button btn btn-primary"  style="color:white;">Get Quote</a>' +
         "</div>";
       console.log(totalQuantity, totalAmount);
       $("#Buycards").html(card);
@@ -257,6 +288,8 @@ function Buy_Now() {
   };
 }
 Buy_Now();
+
+
 
 // To remove items from the cart
 function remove_from_Cart(id) {
@@ -311,8 +344,8 @@ function addto_favourites(id) {
       const itemDetails = JSON.parse(this.responseText);
       console.log(itemDetails);
 
+// To post in Favourites
       const xhttpAdd = new XMLHttpRequest();
-
       xhttpAdd.open("POST", "http://localhost:3000/Favourites");
       xhttpAdd.setRequestHeader("Content-Type", "application/json");
       console.log("hello123");
@@ -329,6 +362,39 @@ function addto_favourites(id) {
     }
   };
 }
+
+
+add_to_favourites_home_office = (id) =>{
+  Fovourites = [];
+  const xhttp_home_office = new XMLHttpRequest();
+  xhttp_home_office.open("GET", `http://localhost:3000/home_office/${id}`);
+  xhttp_home_office.send();
+  xhttp_home_office.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      console.log(id);
+      const itemDetails = JSON.parse(this.responseText);
+      console.log(itemDetails);
+
+      const xhttp_home_favourite = new XMLHttpRequest();
+      xhttp_home_favourite.open("POST", "http://localhost:3000/Favourites");
+      xhttp_home_favourite.setRequestHeader("Content-Type", "application/json");
+      console.log("hello123");
+      xhttp_home_favourite.onload = function () {
+        if (xhttp_home_favourite.status == 200 && xhttp_home_favourite.readystate == 4) {
+
+          const response = JSON.parse(xhttp_home_favourite.responseText);
+          Favourites.push(itemDetails);
+          load_cards();
+
+        }
+      };
+      xhttp_home_favourite.send(JSON.stringify(itemDetails));
+    }
+  };
+
+  }
+
+
 
 // To display the Cards in the favourites page (favourites.html)
 favourite_cards = () => {
@@ -603,12 +669,12 @@ function home_office_load_cards() {
         card += "<h5 class='card-title'>" + home_office["Price"] + "</h5>";
         card += '<p class="card-text">' + home_office["Description"] + "</p>";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="Add_to_Cart(' +
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton ms-2" onclick="Add_to_Cart_home_office(' +
           home_office["id"] +
           ');" >Add to Cart</a>' +
           "&nbsp&nbsp";
         card +=
-          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton mt-3" onclick="addto_favourites(' +
+          '<a href="#" class="btn btn-primary glowing-button darkButton smallButton mt-3" onclick="add_to_favourites_home_office(' +
           home_office["id"] +
           ');">Add toFavorite +</a>';
         card +=
@@ -761,8 +827,8 @@ function admin_edit(id) {
   };
 }
 
-
-function get_quote(){
+// Get Quote to store user
+function get_quote() {
   var name_quote = document.getElementById('name_quote').value;
   var email_quote = document.getElementById('email_quote').value;
   var phone_quote = document.getElementById('phone_quote').value;
@@ -772,9 +838,9 @@ function get_quote(){
   xhttpreq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttpreq.send(
     JSON.stringify({
-      Name:name_quote,
-      Email:email_quote,
-      Phone:phone_quote,
+      Name: name_quote,
+      Email: email_quote,
+      Phone: phone_quote,
     })
   );
   xhttpreq.onreadystatechange = function () {
